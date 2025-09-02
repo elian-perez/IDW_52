@@ -1,0 +1,91 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-image: url('../IMG/fondo-medico.jfif'); 
+    background-size: cover;      
+    background-position: center; 
+    background-repeat: no-repeat; 
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+header {
+    background: hsla(216, 100%, 24%, 0.658);
+    color: #fff;
+    padding: 20px 0 10px 0;
+    text-align: center;
+    margin: 20px 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    
+}
+
+header h1 {
+    margin: 0 0 10px 0;
+    font-size: 2em;
+    
+}
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 05px 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+}  
+
+nav ul li {
+    display: inline;
+
+}
+
+nav ul a{
+    color: #fff;
+    font-weight: 500;
+    text-decoration: none;
+    transition: text-decoration 0,2s color 0,2s;
+    
+}
+
+nav ul a:hover {
+    text-decoration: underline;
+    color: aqua;
+
+}
+
+main {
+    max-width: 700px;
+    margin: 40px auto 0 20px;
+    padding: 0 15px;
+
+}
+
+
+.contacto {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.contacto li {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+}
+
+.contacto li i {
+    margin-right: 10px;
+    color: hsla(216, 100%, 24%, 0.8);
+    min-width: 20px;
+}
+
+footer {
+
+  max-width: 700px;
+    margin: 40px auto 0 20px;
+    padding: 0 15px;
+
+}

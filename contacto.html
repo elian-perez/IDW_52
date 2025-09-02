@@ -3,7 +3,51 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <link rel="stylesheet" href="CSS/contacto.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <title>Clínica Médica Marca Acme S.R.L.</title>
   </head>
-  <body></body>
+  <body>
+    <header>
+      <h1 class="titulo">
+        <span class="color1">Clínica Médica</span>
+        <span class="color2">Marca Acme S.R.L.</span>
+      </h1>
+      <nav>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="institucional.html">Institucional</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="main">
+      <h2>Contacto</h2>
+      <p>Podés comunicarte con nosotros a través de los siguientes medios:</p>
+      <ul class="contacto">
+        <li><i class="fas fa-phone"></i> Teléfono: <a href="tel:12345678">2246-789524</a></li>
+        <li><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/5412345678" target="_blank">Enviar mensaje</a></li>
+        <li><i class="fas fa-envelope"></i> Email: <a href="mailto:acme@clinicasalud.com">contacto@clinicaacme.com</a></li>
+        <li><i class="fas fa-map-marker-alt"></i> Dirección: Calle Coyote 2017, Ciudad Bs As</li>
+      </ul>
+    <h3>Formulario de contacto</h3>
+      <form action="#" method="post">
+        <label for="nombre">Nombre:</label><br />
+        <input type="text" id="nombre" name="nombre" required /><br /><br />
+
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required /><br /><br />
+
+        <label for="mensaje">Mensaje:</label><br />
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea><br /><br />
+
+        <button type="submit">Enviar</button>
+      </form>
+    </main>
+     <footer>
+    <p>&copy; 2025 Clinica Medica - Grupo 52</p>
+  </footer>
+  </body>
 </html>
+
