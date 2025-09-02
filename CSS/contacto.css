@@ -60,6 +60,28 @@ main {
     padding: 0 15px;
 
 }
+
+
+.contacto {
+    list-style: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+.contacto li {
+    margin-bottom: 15px;
+    line-height: 1.6;
+    font-size: 1.1em;
+    display: flex;
+    align-items: center;
+}
+
+.contacto li i {
+    margin-right: 10px;
+    color: hsla(216, 100%, 24%, 0.8);
+    min-width: 20px;
+}
+
 footer {
 
   max-width: 700px;
