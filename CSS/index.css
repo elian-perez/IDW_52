@@ -15,7 +15,7 @@ header {
   padding: 5px 35px 20px 0px;
   text-align: center;
   margin: 0 0;
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 5px 6px #0000000f;
 }
 
 .contenedor-header {
@@ -90,6 +90,15 @@ footer {
 
 .grilla-footer h4 {
     margin-bottom: 8px;
+}
+
+.grilla-footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.grilla-footer a:hover {
+  text-decoration: underline;
 }
 
 .grilla-footer .copyright {
