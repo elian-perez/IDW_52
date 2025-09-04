@@ -57,13 +57,14 @@ nav ul a {
   color: black;
   font-weight: 500;
   text-decoration: none;
-  transition: text-decoration 0.2s, color 0.2s;
+  transition: color 0.3s ease; /* transición más suave solo del color */
 }
 
+
 nav ul a:hover {
-  text-decoration: underline;
-  color: #333333;
+  color: #00aaff; /* color nuevo cuando paso el cursor */
 }
+
 
 
 
