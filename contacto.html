@@ -8,19 +8,21 @@
     <title>Clínica Médica Marca Acme S.R.L.</title>
   </head>
   <body>
-    <header>
-      <h1 class="titulo">
-        <span class="color1">Clínica Médica</span>
-        <span class="color2">Marca Acme S.R.L.</span>
-      </h1>
-      <nav>
-        <ul>
-          <li><a href="index.html">Inicio</a></li>
-          <li><a href="institucional.html">Institucional</a></li>
-          <li><a href="contacto.html">Contacto</a></li>
-        </ul>
-      </nav>
-    </header>
+   <header>
+    <div class="contenedor-header">
+      <a href="index.html">
+        <img src="IMG/logo2.png" alt="Logo de la clínica" class="logo" />
+      </a>
+      </div>
+    <h1>Clínica Médica Marca Acme S.R.L.</h1>
+    <nav>
+      <ul>
+        <li><a href="index.html">Inicio</a></li>
+        <li><a href="institucional.html">Institucional</a></li>
+        <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
 
     <main class="main">
       <h2>Contacto</h2>
@@ -42,11 +44,32 @@
         <label for="mensaje">Mensaje:</label><br />
         <textarea id="mensaje" name="mensaje" rows="5" required></textarea><br /><br />
 
-        <button type="submit">Enviar</button>
+        <button type="submit" class="btn-enviar">Enviar</button>
+
       </form>
     </main>
      <footer>
-    <p>&copy; 2025 Clinica Medica - Grupo 52</p>
+    <div class="grilla-footer">
+      <div>
+        <h4><i class="fas fa-phone"></i>Contacto</h4>
+        <p>+54 9 (2246)-789524</p>
+      </div>
+      <div>
+        <h4><i class="fas fa-map-marker-alt"></i>Dirección</h4>
+        <p>Calle Coyote 2017, Ciudad de Bs. As.</p>
+      </div>
+      <div>
+        <h4><i class="fas fa-envelope"></i>Email</h4>
+        <p>contacto@clinicaacme.com</p>
+      </div>
+      <div>
+        <h4>Síguenos</h4>
+        <p><a href="https://www.facebook.com/tupagina" target="_blank"><i class="fa-brands fa-facebook"></i>Facebook</a> | <a href="https://www.instagram.com/tupagina" target="_blank"><i class="fa-brands fa-instagram"></i>Instagram</a></p>
+      </div>
+    </div>
+    <div class="copyright">
+      <p>&copy; 2025 Clínica Médica Marca Acme S.R.L.  - Grupo 52</p>
+    </div>
   </footer>
   </body>
 </html>

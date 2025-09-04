@@ -1,9 +1,10 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    background-image: url('../IMG/fondo-medico.jfif'); 
-    background-size: cover;      
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background: linear-gradient(to right, rgba(255,255,255,0.7), rgba(255,255,255,0)), 
+                url('../img/fondo-medico.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     color: #333;
     margin: 0;
     padding: 0;
@@ -11,48 +12,60 @@ body {
 
 
 header {
-    background: hsla(216, 100%, 24%, 0.658);
-    color: #fff;
-    padding: 20px 0 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #fafafa;
+  color: black;
+  padding: 5px 35px 20px 0px;
+  text-align: center;
+  margin: 0 0;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.06);
+}
+
+.contenedor-header {
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-header img.logo {
+    width: 280px;
+    height: auto;
+    margin: 5px;
     text-align: center;
-    margin: 20px 0;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-    
 }
 
 header h1 {
-    margin: 0 0 10px 0;
-    font-size: 2em;
-    
+  margin: 0 0 10px 0;
+  font-size: 2em;
+  text-decoration: none;
 }
 nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0 05px 0 0;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-
-}  
-
-nav ul li {
-    display: inline;
-
+  list-style: none;
+  padding: 0;
+  margin: 0;  display: flex;
+  justify-content: center;
+  gap: 30px;
 }
 
-nav ul a{
-    color: #fff;
-    font-weight: 500;
-    text-decoration: none;
-    transition: text-decoration 0,2s color 0,2s;
-    
+nav ul li {
+  display: inline;
+  margin-left: 20px;
+}
+
+nav ul a {
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+  transition: text-decoration 0.2s, color 0.2s;
 }
 
 nav ul a:hover {
-    text-decoration: underline;
-    color: aqua;
-
+  text-decoration: underline;
+  color: #333333;
 }
+
+
 
 main {
     max-width: 700px;
@@ -83,9 +96,50 @@ main {
 }
 
 footer {
+  background: #3b6a9f;
+  color: #f5f5f5;
+  padding: 20px 0 10px 0;
+  margin: 0;
+  width: 100%;
+}
 
-  max-width: 700px;
-    margin: 40px auto 0 20px;
-    padding: 0 15px;
+.grilla-footer i {
+    margin-right: 8px;
+    color: #46bddb;
+    min-width: 20px;
+}
 
+.grilla-footer {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto auto;
+    gap: 20px;
+    text-align: center;
+}
+
+.grilla-footer h4 {
+    margin-bottom: 8px;
+}
+
+.grilla-footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.grilla-footer a:hover {
+  text-decoration: underline;
+}
+
+.grilla-footer .copyright {
+    grid-column: 1 / span 4;
+    border-top: 1px solid #00317aa8;
+    padding-top: 10px;
+}
+
+.copyright {
+    text-align: center;
+    font-size: 13px;
+}
+.btn-enviar {
+  margin-bottom: 20px
 }
