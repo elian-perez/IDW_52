@@ -62,11 +62,23 @@ nav ul a:hover {
 
 main {
   max-width: 700px;
-  margin: 40px auto 0 20px;
+  margin: 40px auto;
   padding: 0 15px;
 }
 
+main h2 {
+  font-size: 2rem;           
+  text-align: center;        
+  margin: 40px 0 20px;       
+  color: #000000;           
+  font-weight: bold;
+  position: relative;
+}
+
+
 article {
+  width: 700px;
+  height: 250px;
   display: flex;
   align-items: flex-start;
   gap: 20px;
