@@ -93,7 +93,7 @@ article {
 
 article img {
   width: 150px;   
-  height: auto;
+  height: 200px;
   border-radius: 8px;
   flex-shrink: 0; 
 }
