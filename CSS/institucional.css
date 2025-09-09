@@ -31,14 +31,14 @@ header {
 }
 
 header h1 {
-  margin: 0 0 10px 0;
+  margin: 10px 0 0px 0;
   font-size: 2em;
   text-decoration: none;
 }
 nav ul {
   list-style: none;
   padding: 0;
-  margin: 0;  display: flex;
+  margin: 17px 0 0px 0;  display: flex;
   justify-content: center;
   gap: 30px;
 }
@@ -57,7 +57,73 @@ nav ul a {
 
 nav ul a:hover {
   text-decoration: underline;
-  color: #333333;
+  color: #00aaff;
+}
+
+main {
+  max-width: 1400px; 
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+.primer-bloque {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 100%;  
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.img-izquierda {
+  flex: 0 0 40%;
+  display: flex;
+}
+
+.img-izquierda img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.texto-derecha {
+  flex: 1;
+  padding: 10px;
+}
+
+.segundo-bloque {
+  display: flex;
+  align-items: stretch;
+  gap: 30px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 30px;
+  margin: 20px auto;
+  max-width: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); 
+}
+
+.texto-izquierda {
+  flex: 1; 
+  padding: 10px;
+}
+
+.img-derecha {
+  flex: 0 0 40%;
+  display: flex;
+}
+
+.img-derecha img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
 }
 
 footer {
@@ -84,6 +150,15 @@ footer {
 
 .grilla-footer h4 {
     margin-bottom: 8px;
+}
+
+.grilla-footer a {
+  color: white;
+  text-decoration: none;
+}
+
+.grilla-footer a:hover {
+  text-decoration: underline;
 }
 
 .grilla-footer .copyright {
