@@ -1,46 +1,51 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="light">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clínica Médica Marca Acme S.R.L.</title>  
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
-  <title>Clínica Médica Marca Acme S.R.L.</title>
+  <!-- Ícono de la pestaña del navegador -->
+  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
 </head>
 
-<body class="bg-light bg-gradient">
-
-  <header class="bg-white bg-opacity-75 shadow-sm py-3 mb-4">
-    <div class="container d-flex flex-column flex-md-row align-items-center justify-content-between">
-
-      <!-- Logo -->
-      <a href="index.html" class="d-flex align-items-center mb-3 mb-md-0 text-decoration-none">
-        <img src="img/logo2.png" alt="Logo de la clínica" class="img-fluid" style="max-width: 255px;">
+<body class="bg-body bg-gradient">
+<!-- Acá comienza el Navbar -->
+  <header class="navbar navbar-expand-lg bg-body-tertiary text-body sticky-top">
+    <div class="container">
+      <!-- Configuración del Logo -->
+      <a class="navbar-brand" href="index.html">
+        <img src="/img/logo2.png" alt="Logo-clinica" style="max-height: 100px; width: auto" />
       </a>
 
-      <!-- Título -->
-      <h1 class="h4 text-center text-md-start mb-3 mb-md-0">Clínica Médica Marca Acme S.R.L.</h1>
+      <!-- Configuración del Botón hamburguesa -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-      <!-- Navegación -->
-
-      <nav>
-        <ul class="nav justify-content-center justify-content-md-end">
-          <li class="nav-item me-2">
-            <a href="index.html" class="btn btn-primary text-white px-3 py-2">Inicio</a>
-          </li>
-          <li class="nav-item me-2">
-            <a href="institucional.html" class="btn btn-success text-white px-3 py-2">Institucional</a>
+      <!-- Menú colapsable -->
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="index.html">Inicio</a>
           </li>
           <li class="nav-item">
-            <a href="contacto.html" class="btn btn-info text-white px-3 py-2">Contacto</a>
+            <a class="nav-link" href="institucional.html">Institucional</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contacto.html">Contacto</a>
+          </li>
+          <li class="nav-item">
+            <button id="btnTheme" class="btn btn-outline-dark ms-3">🌙</button>
           </li>
         </ul>
-      </nav>
-
+      </div>
     </div>
   </header>
-
+  
   <main class="container py-5">
     <!-- Quiénes somos y Nuestra historia -->
     <section class="mb-5">
@@ -104,36 +109,32 @@
     </section>
   </main>
 
-  <footer class="bg-primary text-white pt-4 pb-2 mt-5">
+  <footer class="bg-body-tertiary text-body pt-4 pb-2 mt-5">
     <div class="container">
       <div class="row text-center text-md-start">
 
-        <!-- Contacto -->
         <div class="col-md-3 mb-3">
           <h5><i class="fas fa-phone"></i> Contacto</h5>
           <p>+54 9 (2246)-789524</p>
         </div>
 
-        <!-- Dirección -->
         <div class="col-md-3 mb-3">
           <h5><i class="fas fa-map-marker-alt"></i> Dirección</h5>
           <p>Calle Coyote 2017, Ciudad de Bs. As.</p>
         </div>
 
-        <!-- Email -->
         <div class="col-md-3 mb-3">
           <h5><i class="fas fa-envelope"></i> Email</h5>
           <p>contacto@clinicaacme.com</p>
         </div>
 
-        <!-- Síguenos -->
         <div class="col-md-3 mb-3">
           <h5>Síguenos</h5>
           <p>
-            <a href="https://www.facebook.com/tupagina" target="_blank" class="text-white text-decoration-none">
+            <a href="https://www.facebook.com/tupagina" target="_blank" class="text-body text-decoration-none">
               <i class="fa-brands fa-facebook"></i> Facebook
             </a> |
-            <a href="https://www.instagram.com/tupagina" target="_blank" class="text-white text-decoration-none">
+            <a href="https://www.instagram.com/tupagina" target="_blank" class="text-body text-decoration-none">
               <i class="fa-brands fa-instagram"></i> Instagram
             </a>
           </p>
@@ -141,16 +142,33 @@
 
       </div>
 
-      <hr class="border-light">
+      <hr class="border border-body">
 
       <div class="text-center small">
         &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
       </div>
     </div>
   </footer>
-
+  
+  <!-- Bootstrap JS -->
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
-
+  <!-- Lógica para que funcione el botón de dark mode con JavaScript utilizando Boostrap5-->
+  <script>
+    const btn = document.getElementById("btnTheme");
+    const html = document.documentElement;
+    btn.addEventListener("click", () => {
+      if (html.getAttribute("data-bs-theme") === "light") {
+        html.setAttribute("data-bs-theme", "dark");
+        btn.innerHTML = "☀️";
+        btn.classList.remove("btn-outline-dark");
+        btn.classList.add("btn-outline-light");
+      } else {
+        html.setAttribute("data-bs-theme", "light");
+        btn.innerHTML = "🌙";
+        btn.classList.remove("btn-outline-light");
+        btn.classList.add("btn-outline-dark");
+      }
+    });
+  </script>
 </body>
-
 </html>
