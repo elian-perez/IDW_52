@@ -38,7 +38,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contacto.html">Contacto</a>
+
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">Administrador</a>
+          </li>
+
+
           <li class="nav-item">
             <button id="btnTheme" class="btn btn-outline-dark ms-3">🌙</button>
           </li>
@@ -251,7 +257,16 @@
           </div>
         </article>
       </div>
-    </section>
+   </section>
+
+<!-- Sección de médicos administrables -->
+<section id="medicosContainerSection" class="container my-5">
+  <h2 class="text-center mb-4">Médicos Disponibles (Administración)</h2>
+  <div id="medicosContainer" class="row g-4 justify-content-center">
+    <!-- Aquí se van a insertar los cards de médicos desde app.js -->
+  </div>
+</section>
+
   </main>
 
 
@@ -309,6 +324,8 @@
       }
     });
   </script>
+  <script type="module" src="app.js"></script>
+
 </body>
 
 </html>
