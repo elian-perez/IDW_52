@@ -38,7 +38,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contacto.html">Contacto</a>
+
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">Administrador</a>
+          </li>
+
+
           <li class="nav-item">
             <button id="btnTheme" class="btn btn-outline-dark ms-3">🌙</button>
           </li>
@@ -251,7 +257,16 @@
           </div>
         </article>
       </div>
-    </section>
+   </section>
+
+<!-- Sección de médicos administrables -->
+<section id="medicosContainerSection" class="container my-5">
+  <h2 class="text-center mb-4">Médicos Disponibles (Administración)</h2>
+  <div id="medicosContainer" class="row g-4 justify-content-center">
+    <!-- Aquí se van a insertar los cards de médicos desde app.js -->
+  </div>
+</section>
+
   </main>
 
 
@@ -309,6 +324,47 @@
       }
     });
   </script>
+  <script type="module" src="app.js"></script>
+
+  <!-- nueva parte del index -->
+
+  <script type="module">
+    import { inicializarMedicos } from ".medicos.js";
+    inicializarMedicos();
+
+    const contenedor = document.getElementById("catalogo");
+    const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+
+    contenedor.innerHTML = medicos
+      .map(
+        (m) => `
+        <div class="container my-4 d-flex justify-content-center">
+          <article class="card shadow-lg" style="max-width: 600px">
+            <div class="row g-0 align-items-center">
+              <div class="col-md-4 text-center">
+                <img src="${m.imagen}" alt="${m.nombre}" class="img-fluid rounded-start" />
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h3 class="card-title">${m.nombre}</h3>
+                  <p class="card-text mb-1">Especialidad: ${m.especialidad}</p>
+                  <p class="card-text mb-1">Disponibilidad: ${m.disponibilidad}</p>
+                  <p class="card-text">Obra Social: ${m.obraSocial}</p>
+                  <a href="#" class="btn btn-primary mt-2" onclick="alert('En Desarrollo. Disculpe la molestia.')">
+                    Seleccionar Turno
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      `
+      )
+      .join("");
+  </script>
+
+
+
 </body>
 
 </html>
