@@ -88,13 +88,13 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   
-  const btnVolverInicio = document.createElement("button");
-  btnVolverInicio.textContent = " Volver al inicio";
-  btnVolverInicio.className = "btn btn-secondary mt-3";
-  btnVolverInicio.addEventListener("click", () => {
-    window.location.href = "index.html";
-  });
-  tablaMedicos.parentElement.insertBefore(btnVolverInicio, tablaMedicos);
+  //const btnVolverInicio = document.createElement("button"); 
+  //btnVolverInicio.textContent = " Volver al inicio";
+  //btnVolverInicio.className = "btn btn-secondary mt-3";
+  //btnVolverInicio.addEventListener("click", () => {
+  //  window.location.href = "index.html";
+  //});
+  //tablaMedicos.parentElement.insertBefore(btnVolverInicio, tablaMedicos);
 
 });
 
