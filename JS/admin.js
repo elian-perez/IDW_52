@@ -51,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       especialidad: document.getElementById("especialidad").value.trim(),
       telefono: document.getElementById("telefono").value.trim(),
       email: document.getElementById("email").value.trim(),
+      foto: document.getElementById("foto").value.trim() || "default.jpg",
     };
 
     if (idMedico.value) {
@@ -74,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("especialidad").value = medico.especialidad;
       document.getElementById("telefono").value = medico.telefono;
       document.getElementById("email").value = medico.email;
+      document.getElementById("foto").value = medico.foto || "";
       modal.show();
     }
 
