@@ -1,12 +1,17 @@
 console.log("📋 medicos.js cargado correctamente");
 
-function mostrarMedicos() {
+export function mostrarMedicos() {
   const tabla = document.getElementById("tablaMedicos");
+  if (!tabla) {
+    console.warn("No se encontró el elemento 'tablaMedicos' en esta página.");
+    return;
+  }
+
   const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
 
   tabla.innerHTML = ""; // limpiar antes de mostrar
 
-  medicos.forEach(medico => {
+  medicos.forEach((medico) => {
     const fila = `
       <tr>
         <td>${medico.id}</td>

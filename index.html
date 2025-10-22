@@ -8,43 +8,29 @@
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  
+
   <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
 </head>
 
 <body class="bg-body bg-gradient">
-  
+
   <header class="navbar navbar-expand-lg bg-body-tertiary text-body sticky-top">
     <div class="container">
-      
       <a class="navbar-brand" href="index.html">
         <img src="img/logo2.png" alt="Logo-clinica" style="max-height: 100px; width: auto" />
       </a>
 
-      
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="institucional.html">Institucional</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto.html">Contacto</a>
-
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="admin.html">Administrador</a>
-          </li>
-
-
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="institucional.html">Institucional</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+          <li class="nav-item"><a class="nav-link" href="admin.html">Administrador</a></li>
           <li class="nav-item">
             <button id="btnTheme" class="btn btn-outline-dark ms-3">🌙</button>
           </li>
@@ -54,7 +40,7 @@
   </header>
 
   <main>
-   
+
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -107,7 +93,6 @@
       </button>
     </div>
 
-    
     <div class="bg-body-tertiary text-center p-5 my-5 rounded shadow-sm">
       <h3 class="fw-bold mb-3">Porque tu bienestar merece atención personalizada.</h3>
       <p class="mb-4">Agenda tu turno de manera rápida y sencilla con nuestros profesionales.</p>
@@ -257,18 +242,17 @@
           </div>
         </article>
       </div>
-   </section>
+    </section>
 
-<!-- Sección de médicos administrables -->
-<section id="medicosContainerSection" class="container my-5">
-  <h2 class="text-center mb-4">Médicos Disponibles (Administración)</h2>
-  <div id="medicosContainer" class="row g-4 justify-content-center">
-    <!-- Aquí se van a insertar los cards de médicos desde app.js -->
-  </div>
-</section>
+    <!-- Sección de médicos administrables -->
+    <section id="medicosContainerSection" class="container my-5">
+      <h2 class="text-center mb-4">Médicos Disponibles (Administración)</h2>
+      <div id="medicosContainer" class="row g-4 justify-content-center">
+        <!-- Aquí se van a insertar los cards de médicos desde app.js -->
+      </div>
+    </section>
 
   </main>
-
 
   <footer class="bg-body-tertiary text-body pt-4 pb-2 mt-5">
     <div class="container">
@@ -304,45 +288,27 @@
     </div>
   </footer>
 
-  
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
- 
-  <script>
-    const btn = document.getElementById("btnTheme");
-    const html = document.documentElement;
-    btn.addEventListener("click", () => {
-      if (html.getAttribute("data-bs-theme") === "light") {
-        html.setAttribute("data-bs-theme", "dark");
-        btn.innerHTML = "☀️";
-        btn.classList.remove("btn-outline-dark");
-        btn.classList.add("btn-outline-light");
-      } else {
-        html.setAttribute("data-bs-theme", "light");
-        btn.innerHTML = "🌙";
-        btn.classList.remove("btn-outline-light");
-        btn.classList.add("btn-outline-dark");
-      }
-    });
-  </script>
-  <script type="module" src="app.js"></script>
+  <script type="module" src="js/tema.js"></script>
+
+  <script type="module" src="js/app.js"></script>
 
   <!-- nueva parte del index -->
 
   <script type="module">
-    import { inicializarMedicos } from ".medicos.js";
+    import { inicializarMedicos } from "./js/app.js";
     inicializarMedicos();
 
     const contenedor = document.getElementById("catalogo");
     const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
 
-    contenedor.innerHTML = medicos
-      .map(
-        (m) => `
+    if (contenedor) {
+      contenedor.innerHTML = medicos.map((m) => `
         <div class="container my-4 d-flex justify-content-center">
           <article class="card shadow-lg" style="max-width: 600px">
             <div class="row g-0 align-items-center">
               <div class="col-md-4 text-center">
-                <img src="${m.imagen}" alt="${m.nombre}" class="img-fluid rounded-start" />
+                <img src="${m.imagen || m.foto}" alt="${m.nombre}" class="img-fluid rounded-start" />
               </div>
               <div class="col-md-8">
                 <div class="card-body">
@@ -358,12 +324,9 @@
             </div>
           </article>
         </div>
-      `
-      )
-      .join("");
+      `).join("");
+    }
   </script>
-
-
 
 </body>
 
