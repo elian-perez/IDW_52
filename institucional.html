@@ -7,26 +7,26 @@
   <title>Clínica Médica Marca Acme S.R.L.</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
-  
+
   <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
 </head>
 
 <body class="bg-body bg-gradient">
- 
+
   <header class="navbar navbar-expand-lg bg-body-tertiary text-body sticky-top">
     <div class="container">
-     
+
       <a class="navbar-brand" href="index.html">
         <img src="img/logo2.png" alt="Logo-clinica" style="max-height: 100px; width: auto" />
       </a>
 
-      
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      
+
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
@@ -37,7 +37,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="contacto.html">Contacto</a>
+
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="admin.html">Administrador</a>
+          </li>
+
+
           <li class="nav-item">
             <button id="btnTheme" class="btn btn-outline-dark ms-3">🌙</button>
           </li>
@@ -47,7 +53,7 @@
   </header>
 
   <main class="container py-5">
-    
+
     <section class="mb-5">
       <div class="row g-4 align-items-center">
         <div class="col-lg-6">
@@ -76,7 +82,7 @@
       </div>
     </section>
 
-    
+
     <section class="mb-5">
       <div class="row g-4 align-items-center">
         <div class="col-lg-6 order-lg-2">
@@ -151,26 +157,10 @@
     </div>
   </footer>
 
-  
+
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
- 
-  <script>
-    const btn = document.getElementById("btnTheme");
-    const html = document.documentElement;
-    btn.addEventListener("click", () => {
-      if (html.getAttribute("data-bs-theme") === "light") {
-        html.setAttribute("data-bs-theme", "dark");
-        btn.innerHTML = "☀️";
-        btn.classList.remove("btn-outline-dark");
-        btn.classList.add("btn-outline-light");
-      } else {
-        html.setAttribute("data-bs-theme", "light");
-        btn.innerHTML = "🌙";
-        btn.classList.remove("btn-outline-light");
-        btn.classList.add("btn-outline-dark");
-      }
-    });
-  </script>
+  <script type="module" src="js/tema.js"></script>
+
 </body>
 
 </html>

@@ -1,8 +1,7 @@
-
 import { inicializarMedicos } from "./app.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  inicializarMedicos(); 
+  inicializarMedicos();
 
   const tablaMedicos = document.getElementById("tablaMedicos");
   const formMedico = document.getElementById("formMedico");
@@ -12,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
 
-  
   const mostrarMedicos = () => {
     tablaMedicos.innerHTML = "";
     medicos.forEach((medico, index) => {
@@ -34,7 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mostrarMedicos();
 
-  
   btnNuevo.addEventListener("click", () => {
     formMedico.reset();
     idMedico.value = "";
@@ -45,11 +42,16 @@ document.addEventListener("DOMContentLoaded", () => {
     e.preventDefault();
 
     const nuevoMedico = {
-      id: idMedico.value ? parseInt(idMedico.value) : Date.now(),
+      id: idMedico.value
+        ? parseInt(idMedico.value)
+        : medicos.length > 0
+        ? medicos[medicos.length - 1].id + 1
+        : 1,
       nombre: document.getElementById("nombre").value.trim(),
       especialidad: document.getElementById("especialidad").value.trim(),
       telefono: document.getElementById("telefono").value.trim(),
       email: document.getElementById("email").value.trim(),
+      foto: document.getElementById("foto").value.trim() || "default.jpg",
     };
 
     if (idMedico.value) {
@@ -64,7 +66,6 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.hide();
   });
 
-  
   tablaMedicos.addEventListener("click", (e) => {
     if (e.target.classList.contains("btnEditar")) {
       const index = e.target.dataset.index;
@@ -74,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("especialidad").value = medico.especialidad;
       document.getElementById("telefono").value = medico.telefono;
       document.getElementById("email").value = medico.email;
+      document.getElementById("foto").value = medico.foto || "";
       modal.show();
     }
 
@@ -86,15 +88,4 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
   });
-
-  
-  const btnVolverInicio = document.createElement("button");
-  btnVolverInicio.textContent = " Volver al inicio";
-  btnVolverInicio.className = "btn btn-secondary mt-3";
-  btnVolverInicio.addEventListener("click", () => {
-    window.location.href = "index.html";
-  });
-  tablaMedicos.parentElement.insertBefore(btnVolverInicio, tablaMedicos);
-
 });
-
