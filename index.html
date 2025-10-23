@@ -8,37 +8,29 @@
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  
+
   <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
 </head>
 
 <body class="bg-body bg-gradient">
-  
+
   <header class="navbar navbar-expand-lg bg-body-tertiary text-body sticky-top">
     <div class="container">
-      
       <a class="navbar-brand" href="index.html">
         <img src="img/logo2.png" alt="Logo-clinica" style="max-height: 100px; width: auto" />
       </a>
 
-      
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
         aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      
       <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ms-auto">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="institucional.html">Institucional</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contacto.html">Contacto</a>
-          </li>
+        <ul class="navbar-nav ms-auto d-flex align-items-center">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Inicio</a></li>
+          <li class="nav-item"><a class="nav-link" href="institucional.html">Institucional</a></li>
+          <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+          <li class="nav-item"><a class="nav-link d-flex align-items-center" href="admin.html" title="Administrador"><i class="fa-solid fa-right-to-bracket"></i></a></li>
           <li class="nav-item">
             <button id="btnTheme" class="btn btn-outline-dark ms-3">🌙</button>
           </li>
@@ -48,7 +40,7 @@
   </header>
 
   <main>
-   
+
     <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
@@ -101,214 +93,59 @@
       </button>
     </div>
 
-    
     <div class="bg-body-tertiary text-center p-5 my-5 rounded shadow-sm">
       <h3 class="fw-bold mb-3">Porque tu bienestar merece atención personalizada.</h3>
       <p class="mb-4">Agenda tu turno de manera rápida y sencilla con nuestros profesionales.</p>
       <a href="#turnos" class="btn btn-success btn-lg px-4" onclick="alert('En Desarrollo. Disculpe la molestia.')">
         Reservar Turno</a>
     </div>
-    <section>
-      <h2 class="text-center">Profesionales Disponibles</h2>
-      <div class="container d-flex justify-content-center my-4">
-        <article class="card shadow-lg" style="max-width: 600px">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4 text-center">
-              <img src="img/cardiólogo.jpg" alt="Dr. Jesús María Cuore" class="img-fluid rounded-start" />
-            </div>
-
-            <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">Dr. Jesús María Amor</h3>
-                <p class="card-text mb-1">Especialidad: Cardiología.</p>
-                <p class="card-text mb-1">
-                  Disponibilidad: las 24 horas. Las cosas del corazón no
-                  tienen horario.
-                </p>
-                <p class="card-text">Obra Social: Buscando la Cura.</p>
-                <a href="#" class="btn btn-primary mt-2" onclick="alert('En Desarrollo. Disculpe la molestia.')">
-                  Seleccionar Turno</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="container my-4 d-flex justify-content-center">
-        <article class="card shadow" style="max-width: 600px">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4 text-center">
-              <img src="img/cirujano.jpg" alt="Dr. Mario Miguel Tajo" class="img-fluid rounded-start" />
-            </div>
-
-            <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">Dr. Mario Miguel Trozado</h3>
-                <p class="card-text mb-1">Especialidad: Cirugía.</p>
-                <p class="card-text mb-1">
-                  Disponibilidad: a veces. Suele cortarse solo.
-                </p>
-                <p class="card-text">Obra Social: Ya Vuelvo.</p>
-                <a href="#" class="btn btn-primary mt-2" onclick="alert('En Desarrollo. Disculpe la molestia.')">
-                  Seleccionar Turno</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="container my-4 d-flex justify-content-center">
-        <article class="card shadow-lg" style="max-width: 600px">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4 text-center">
-              <img src="img/pediatra.jpg" alt="Dr. Atilio Simón Garabato" class="img-fluid rounded-start" />
-            </div>
-
-            <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">Dr. Atilio Simón Garabato</h3>
-                <p class="card-text mb-1">Especialidad: Pediatría.</p>
-                <p class="card-text mb-1">
-                  Disponibilidad: lunes a lunes por la tarde. Siempre está
-                  disfrazado de Superhéroe.
-                </p>
-                <p class="card-text">Obra Social: La Liga de la justicia.</p>
-                <a href="#" class="btn btn-primary mt-2" onclick="alert('En Desarrollo. Disculpe la molestia.')">
-                  Seleccionar Turno</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="container my-4 d-flex justify-content-center">
-        <article class="card shadow-lg" style="max-width: 600px">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4 text-center">
-              <img src="img/gastroenteróloga.jpg" alt="Dra. Patricia Lorena Morfi" class="img-fluid rounded-start" />
-            </div>
-
-            <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">Dra. Patricia Lorena Feliz</h3>
-                <p class="card-text mb-1">Especialidad: Gastroenterología.</p>
-                <p class="card-text mb-1">
-                  Disponibilidad: Sábados por la noche y Domingos al mediodía.
-                  Las dietas son sus dibujos.
-                </p>
-                <p class="card-text">Obra Social: El Bodegón</p>
-                <a href="#" class="btn btn-primary mt-2" onclick="alert('En Desarrollo. Disculpe la molestia.')">
-                  Seleccionar Turno</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="container my-4 d-flex justify-content-center">
-        <article class="card shadow-lg" style="max-width: 600px">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4 text-center">
-              <img src="img/oftalmóloga.jpg" alt="Dra. Ernestina Luz Pispiar" class="img-fluid rounded-start" />
-            </div>
-
-            <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">Dra. Ernestina Luz Del Campo</h3>
-                <p class="card-text mb-1">Especialidad: Oftalmóloga.</p>
-                <p class="card-text mb-1">
-                  Disponibilidad: Las 24 horas. Espera ser vista.
-                </p>
-                <p class="card-text">Obra Social: Los Ojos que Hablan.</p>
-                <a href="#" class="btn btn-primary mt-2" onclick="alert('En Desarrollo. Disculpe la molestia.')">
-                  Seleccionar Turno</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
-
-      <div class="container my-4 d-flex justify-content-center">
-        <article class="card shadow-lg" style="max-width: 600px">
-          <div class="row g-0 align-items-center">
-            <div class="col-md-4 text-center">
-              <img src="img/psicólogo.jpg" alt="Dr. Benjamín Anselmo Biri Biri" class="img-fluid rounded-start" />
-            </div>
-
-            <div class="col-md-8">
-              <div class="card-body">
-                <h3 class="card-title">Dr. Benjamín Anselmo Mento</h3>
-                <p class="card-text mb-1">Especialidad: Psicología.</p>
-                <p class="card-text mb-1">
-                  Disponibilidad: Lunes a Viernes por la tarde. El sofá es su
-                  lugar.
-                </p>
-                <p class="card-text">Obra Social: Relajate</p>
-                <a href="#" class="btn btn-primary mt-2" onclick="alert('En Desarrollo. Disculpe la molestia.')">
-                  Seleccionar Turno</a>
-              </div>
-            </div>
-          </div>
-        </article>
-      </div>
+    <section class="container my-5">
+      <h2 class="text-center mb-4">Nuestro Staff Médico</h2>
+      <div id="contenedorMedicos" class="row g-4 justify-content-center"></div>
     </section>
+
   </main>
 
-
   <footer class="bg-body-tertiary text-body pt-4 pb-2 mt-5">
-    <div class="container">
-      <div class="row text-center text-md-start">
-        <div class="col-md-3 mb-3">
-          <h5><i class="fas fa-phone"></i> Contacto</h5>
-          <p>+54 9 (2246)-789524</p>
-        </div>
-        <div class="col-md-3 mb-3">
-          <h5><i class="fas fa-map-marker-alt"></i> Dirección</h5>
-          <p>Calle Coyote 2017, Ciudad de Bs. As.</p>
-        </div>
-        <div class="col-md-3 mb-3">
-          <h5><i class="fas fa-envelope"></i> Email</h5>
-          <p>contacto@clinicaacme.com</p>
-        </div>
-        <div class="col-md-3 mb-3">
-          <h5>Síguenos</h5>
-          <p>
-            <a href="https://www.facebook.com/tupagina" target="_blank" class="text-body text-decoration-none">
-              <i class="fa-brands fa-facebook"></i> Facebook
-            </a> |
-            <a href="https://www.instagram.com/tupagina" target="_blank" class="text-body text-decoration-none">
-              <i class="fa-brands fa-instagram"></i> Instagram
-            </a>
-          </p>
-        </div>
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-12 col-sm-6 col-md-3 mb-3">
+        <h5><i class="fas fa-phone"></i> Contacto</h5>
+        <p>+54 9 (2246)-789524</p>
       </div>
-      <hr class="border border-body">
-      <div class="text-center small">
-        &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
+      <div class="col-12 col-sm-6 col-md-3 mb-3">
+        <h5><i class="fas fa-map-marker-alt"></i> Dirección</h5>
+        <p>Calle Coyote 2017, Ciudad de Bs. As.</p>
+      </div>
+      <div class="col-12 col-sm-6 col-md-3 mb-3">
+        <h5><i class="fas fa-envelope"></i> Email</h5>
+        <p class="text-break">contacto@clinicaacme.com</p>
+      </div>
+      <div class="col-12 col-sm-6 col-md-3 mb-3 text-center">
+        <h5>Síguenos</h5>
+        <div class="d-flex justify-content-center gap-3 mt-2">
+          <a href="https://www.facebook.com/tupagina" target="_blank" class="text-body text-decoration-none fs-7">
+            <i class="fa-brands fa-facebook"></i> Facebook
+          </a>
+          <a href="https://www.instagram.com/tupagina" target="_blank" class="text-body text-decoration-none fs-8">
+            <i class="fa-brands fa-instagram"></i> Instagram
+          </a>
+        </div>
       </div>
     </div>
-  </footer>
 
-  
+    <hr class="border border-body">
+    <div class="text-center small">
+      &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
+    </div>
+  </div>
+</footer>
+
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
- 
-  <script>
-    const btn = document.getElementById("btnTheme");
-    const html = document.documentElement;
-    btn.addEventListener("click", () => {
-      if (html.getAttribute("data-bs-theme") === "light") {
-        html.setAttribute("data-bs-theme", "dark");
-        btn.innerHTML = "☀️";
-        btn.classList.remove("btn-outline-dark");
-        btn.classList.add("btn-outline-light");
-      } else {
-        html.setAttribute("data-bs-theme", "light");
-        btn.innerHTML = "🌙";
-        btn.classList.remove("btn-outline-light");
-        btn.classList.add("btn-outline-dark");
-      }
-    });
-  </script>
+  <script type="module" src="js/tema.js"></script>
+  <script type="module" src="js/medicosindex.js"></script>
+  <script type="module" src="js/app.js"></script>
+
 </body>
 
 </html>
