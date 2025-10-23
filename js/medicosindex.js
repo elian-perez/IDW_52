@@ -1,6 +1,6 @@
 import { inicializarMedicos } from "./app.js";
 
-console.log("📋 medicosindex.js cargado correctamente");
+console.log("medicosindex.js cargado correctamente");
 
 inicializarMedicos();
 
@@ -22,9 +22,16 @@ export function mostrarMedicos() {
     card.innerHTML = `
       <div class="card h-100 shadow-sm">
         <img src="img/${medico.foto || 'default.jpg'}"
-          class="card-img-top"
           alt="${medico.nombre}"
-          style="width: 100%; height: 250px; object-fit: cover; background-color: #f8f9fa;">
+          class="card-img-top rounded-top"
+          style="
+            width: 100%;
+            height: 260px;
+            object-fit: cover;
+            object-position: center;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #ddd;
+          ">
 
         <div class="card-body text-center">
           <h5 class="card-title">${medico.nombre}</h5>

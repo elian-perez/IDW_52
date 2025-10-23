@@ -31,7 +31,7 @@ export const medicosIniciales = [
     especialidad: "Gastroenterología",
     disponibilidad: "Sábados por la noche y domingos al mediodía",
     obraSocial: "El Bodegón",
-    foto: "../img/pata.jpg",
+    foto: "../img/pata2.jpg",
   },
   {
     id: 5,
@@ -47,6 +47,6 @@ export const medicosIniciales = [
     especialidad: "Psicología",
     disponibilidad: "Lunes a Viernes por la tarde",
     obraSocial: "Relajate",
-    foto: "../img/correcamino.png",
+    foto: "../img/correcamino2.jpg",
   },
 ];

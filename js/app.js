@@ -32,7 +32,7 @@ export const inicializarMedicos = () => {
         especialidad: "Gastroenterología",
         telefono: "2246-000004",
         email: "patricia@clinica.com",
-        foto: "pata.jpg",
+        foto: "pata2.jpg",
       },
       {
         id: 5,
@@ -48,7 +48,7 @@ export const inicializarMedicos = () => {
         especialidad: "Psicología",
         telefono: "2246-000006",
         email: "benjamin@clinica.com",
-        foto: "correcamino.png",
+        foto: "correcamino2.jpg",
       },
     ];
     localStorage.setItem("medicos", JSON.stringify(medicosIniciales));
