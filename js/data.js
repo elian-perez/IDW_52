@@ -7,7 +7,7 @@ export const medicosIniciales = [
     especialidad: "Cardiología",
     disponibilidad: "las 24 horas",
     obraSocial: "Buscando la Cura",
-    foto: "../img/cardiólogo.jpg",
+    foto: "../img/porki.png",
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const medicosIniciales = [
     especialidad: "Cirugía",
     disponibilidad: "a veces",
     obraSocial: "Ya Vuelvo",
-    foto: "../img/cirujano.jpg",
+    foto: "../img/silvestre.png",
   },
   {
     id: 3,
@@ -23,7 +23,7 @@ export const medicosIniciales = [
     especialidad: "Pediatría",
     disponibilidad: "lunes a lunes por la tarde",
     obraSocial: "La Liga de la justicia",
-    foto: "../img/pediatra.jpg",
+    foto: "../img/lucas.png",
   },
   {
     id: 4,
@@ -31,7 +31,7 @@ export const medicosIniciales = [
     especialidad: "Gastroenterología",
     disponibilidad: "Sábados por la noche y domingos al mediodía",
     obraSocial: "El Bodegón",
-    foto: "../img/gastroenteróloga.jpg",
+    foto: "../img/pata.jpg",
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ export const medicosIniciales = [
     especialidad: "Oftalmología",
     disponibilidad: "las 24 horas",
     obraSocial: "Los Ojos que Hablan",
-    foto: "../img/oftalmóloga.jpg",
+    foto: "../img/lolabunny.jpg",
   },
   {
     id: 6,
@@ -47,6 +47,6 @@ export const medicosIniciales = [
     especialidad: "Psicología",
     disponibilidad: "Lunes a Viernes por la tarde",
     obraSocial: "Relajate",
-    foto: "../img/psicólogo.jpg",
+    foto: "../img/correcamino.png",
   },
 ];
