@@ -8,6 +8,7 @@ export const inicializarMedicos = () => {
         especialidad: "Cardiología",
         telefono: "2246-000001",
         email: "jesus@clinica.com",
+        foto: "porki.png",
       },
       {
         id: 2,
@@ -15,6 +16,7 @@ export const inicializarMedicos = () => {
         especialidad: "Cirugía",
         telefono: "2246-000002",
         email: "mario@clinica.com",
+        foto: "silvestre.png",
       },
       {
         id: 3,
@@ -22,6 +24,7 @@ export const inicializarMedicos = () => {
         especialidad: "Pediatría",
         telefono: "2246-000003",
         email: "atilio@clinica.com",
+        foto: "lucas.png",
       },
       {
         id: 4,
@@ -29,6 +32,7 @@ export const inicializarMedicos = () => {
         especialidad: "Gastroenterología",
         telefono: "2246-000004",
         email: "patricia@clinica.com",
+        foto: "pata.jpg",
       },
       {
         id: 5,
@@ -36,6 +40,7 @@ export const inicializarMedicos = () => {
         especialidad: "Oftalmología",
         telefono: "2246-000005",
         email: "ernestina@clinica.com",
+        foto: "lolabunny",
       },
       {
         id: 6,
@@ -43,6 +48,7 @@ export const inicializarMedicos = () => {
         especialidad: "Psicología",
         telefono: "2246-000006",
         email: "benjamin@clinica.com",
+        foto: "correcamino.png"
       },
     ];
     localStorage.setItem("medicos", JSON.stringify(medicosIniciales));

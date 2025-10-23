@@ -22,6 +22,10 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${medico.telefono}</td>
         <td>${medico.email}</td>
         <td>
+          <img src="img/${medico.foto}" alt="${medico.nombre}" width="60" height="60" class="rounded">
+          <div class="small text-muted">${medico.foto}</div>
+        </td>
+        <td>
           <button class="btn btn-warning btn-sm btnEditar" data-index="${index}">Editar</button>
           <button class="btn btn-danger btn-sm btnEliminar" data-index="${index}">Eliminar</button>
         </td>
