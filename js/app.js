@@ -13,7 +13,7 @@ export const inicializarMedicos = () => {
       {
         id: 2,
         nombre: "Dr. Mario Miguel Trozado",
-        especialidad: "Cirugía",
+        especialidad: "Cirujano",
         telefono: "2246-000002",
         email: "mario@clinica.com",
         foto: "silvestre.png",
