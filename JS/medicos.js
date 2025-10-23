@@ -9,7 +9,7 @@ export function mostrarMedicos() {
 
   const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
 
-  tabla.innerHTML = ""; // limpiar antes de mostrar
+  tabla.innerHTML = ""; 
 
   medicos.forEach((medico) => {
     const fila = `
