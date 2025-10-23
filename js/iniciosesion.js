@@ -1,4 +1,4 @@
-const adminUsers = { username: "admin", password: "1234" };
+const adminUsers = { username: "acme", password: "saraza" };
 
 document.getElementById("loginForm").addEventListener("submit", (e) => {
   e.preventDefault();

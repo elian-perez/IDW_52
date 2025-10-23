@@ -35,8 +35,6 @@ Si bien cada grupo tenía responsabilidades específicas, el trabajo se realizó
 
 *Segunda entrega del proyecto del Trabajo Final  Integrador 
 
-
-
 En esta etapa trabajamos en la integración de Bootstrap  al proyecto, reemplazando el CSS personalizado.  
 El objetivo fue lograr un diseño responsivo, más limpio y estandarizado, aprovechando las utilidades y componentes de Bootstrap.  
 
@@ -52,6 +50,34 @@ El objetivo fue lograr un diseño responsivo, más limpio y estandarizado, aprov
 Ahora el sitio:
  Se adapta mejor a distintos tamaños de pantalla.  
  Tiene un diseño más consistente.  
- Mantiene una estructura clara y simple, respetando la consigna de trabajar sin CSS externo.  
+ Mantiene una estructura clara y simple, respetando la consigna de trabajar sin CSS externo. 
+
+# Proyecto de Desarrollo Web – Etapa 3
+
+En esta tercera etapa del proyecto se implementaron las siguientes mejoras y funcionalidades:
+
+## Sección de Administración
+- Se incorporó una **sección de administración** protegida mediante **usuario y contraseña**, de modo que solo el personal autorizado de la clínica pueda acceder.  
+  - **Usuario:** `acme`  
+  - **Contraseña:** `saraza`
+
+## Sistema de Inicio de Sesión
+- Se integraron los archivos **.js** necesarios para el correcto funcionamiento del sistema basado en **LocalStorage**.  
+- El **inicio de sesión** se desarrolla completamente en el navegador, utilizando **LocalStorage** para almacenar y validar las credenciales.
+
+## Diseño Responsive
+- Se realizaron ajustes en el diseño para lograr una **adaptación total a distintos tamaños de pantalla**, mejorando la experiencia en dispositivos móviles, tablets y escritorio.
+
+## Nuevos Archivos
+- Se añadieron los archivos:
+  - `admin.html`
+  - `iniciosesion.html`
+
+## Actualización del Catálogo Médico
+- Se implementó un sistema dinámico que permite que, **a medida que se cargan nuevos médicos**, estos se **actualicen automáticamente** en el catálogo principal del sitio (`index.html`).
+
+---
+
+**Estado actual:** Proyecto en desarrollo, con sistema de administración funcional y diseño responsive mejorado.
 
 
