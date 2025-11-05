@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración | Clínica Médica Marca Acme S.R.L.</title>
+  <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+</head>
+
+<body class="bg-body-tertiary">
+
+  <!-- Verificación de sesión -->
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "iniciosesion.html";
+    }
+  </script>
+
+  <!-- NAVBAR -->
+  <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
+      </a>
+      <h4 class="text-center fw-bold mb-0 flex-grow-1">Panel de Administración</h4>
+      <button onclick="logout()" class="btn btn-outline-danger ms-3">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="container my-5">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Bienvenido al panel de administración</h2>
+      <p class="text-muted">Seleccione una sección para gestionar los datos del sitio</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Gestión de Médicos -->
+      <div class="col-md-4 col-sm-6">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <i class="fa-solid fa-user-doctor fa-3x mb-3 text-primary"></i>
+            <h5 class="card-title fw-bold">Staff Médico</h5>
+            <p class="card-text text-muted">Alta, baja y modificación de médicos de la clínica.</p>
+            <a href="medicos.html" class="btn btn-primary w-100">Ir a Médicos</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gestión de Especialidades -->
+      <div class="col-md-4 col-sm-6">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <i class="fa-solid fa-stethoscope fa-3x mb-3 text-success"></i>
+            <h5 class="card-title fw-bold">Especialidades</h5>
+            <p class="card-text text-muted">Administrar las especialidades médicas disponibles.</p>
+            <a href="especialidades.html" class="btn btn-success w-100">Ir a Especialidades</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gestión de Obras Sociales -->
+      <div class="col-md-4 col-sm-6">
+        <div class="card h-100 shadow-sm text-center border-0">
+          <div class="card-body">
+            <i class="fa-solid fa-file-medical fa-3x mb-3 text-info"></i>
+            <h5 class="card-title fw-bold">Obras Sociales</h5>
+            <p class="card-text text-muted">Gestionar las obras sociales con convenio.</p>
+            <a href="obras.html" class="btn btn-info text-white w-100">Ir a Obras Sociales</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-5">
+      <a href="index.html" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-house"></i> Volver al inicio del sitio
+      </a>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-body text-body text-center py-3 border-top mt-5">
+    <div class="container small">
+      &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "iniciosesion.html";
+    }
+  </script>
+
+</body>
+</html>
