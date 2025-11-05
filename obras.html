@@ -37,6 +37,7 @@
       <button id="btnNueva" class="btn btn-success">+ Nueva Obra Social</button>
     </div>
 
+    <!-- 🩺 Tabla -->
     <div class="table-responsive shadow-sm rounded">
       <table class="table table-bordered align-middle text-center mb-0">
         <thead class="table-dark">
@@ -45,43 +46,53 @@
             <th>Nombre</th>
             <th>Teléfono</th>
             <th>Email</th>
+            <th>Imagen</th>
             <th>Acciones</th>
           </tr>
         </thead>
         <tbody id="tablaObras"></tbody>
       </table>
     </div>
-  </main>
 
-  <!-- 💬 Modal Obra Social -->
-  <div class="modal fade" id="modalObra" tabindex="-1">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Agregar / Editar Obra Social</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-        </div>
-        <div class="modal-body">
-          <form id="formObra">
-            <input type="hidden" id="idObra">
-            <div class="mb-3">
-              <label for="nombreObra" class="form-label">Nombre de la Obra Social</label>
-              <input type="text" id="nombreObra" class="form-control" required>
-            </div>
-            <div class="mb-3">
-              <label for="telefonoObra" class="form-label">Teléfono</label>
-              <input type="text" id="telefonoObra" class="form-control">
-            </div>
-            <div class="mb-3">
-              <label for="emailObra" class="form-label">Email</label>
-              <input type="email" id="emailObra" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary w-100">Guardar</button>
-          </form>
+    <!-- 💬 Modal Obra Social -->
+    <div class="modal fade" id="modalObra" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Agregar / Editar Obra Social</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="formObra">
+              <input type="hidden" id="idObra">
+
+              <div class="mb-3">
+                <label for="nombreObra" class="form-label">Nombre</label>
+                <input type="text" id="nombreObra" class="form-control" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="telefonoObra" class="form-label">Teléfono</label>
+                <input type="text" id="telefonoObra" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                <label for="emailObra" class="form-label">Email</label>
+                <input type="email" id="emailObra" class="form-control">
+              </div>
+
+              <div class="mb-3">
+                <label for="imagenObra" class="form-label">Imagen (archivo en /img/logos_os)</label>
+                <input type="text" id="imagenObra" class="form-control" placeholder="ej: logos_os/osde.jpg">
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">Guardar</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+
 
   <footer class="bg-body text-body text-center py-3 border-top mt-5">
     <div class="container small">
