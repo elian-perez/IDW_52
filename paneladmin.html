@@ -14,7 +14,7 @@
 
   <!-- Verificación de sesión -->
   <script>
-    if (localStorage.getItem("isLoggedIn") !== "true") {
+    if (!sessionStorage.getItem("accessToken")) {
       window.location.href = "iniciosesion.html";
     }
   </script>
@@ -34,6 +34,7 @@
   <main class="container my-5">
     <div class="text-center mb-5">
       <h2 class="fw-bold">Bienvenido al panel de administración</h2>
+      <h4 class="fw-bold">Usuario activo: <span id="nombreUsuario"></span></h4>
       <p class="text-muted">Seleccione una sección para gestionar los datos del sitio</p>
     </div>
 
@@ -94,8 +95,15 @@
   <!-- JS -->
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
   <script>
+    const user = JSON.parse(sessionStorage.getItem("user"));
+    if (user) {
+      document.getElementById("nombreUsuario").textContent = user.username;
+    }
+  </script>
+  <script>
     function logout() {
-      localStorage.removeItem("isLoggedIn");
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("user");
       window.location.href = "iniciosesion.html";
     }
   </script>

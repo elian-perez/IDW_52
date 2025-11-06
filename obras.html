@@ -12,7 +12,7 @@
 
   <!-- 🔒 Verificación de sesión -->
   <script>
-    if (localStorage.getItem("isLoggedIn") !== "true") {
+    if (!sessionStorage.getItem("accessToken")) {
       window.location.href = "iniciosesion.html";
     }
   </script>
@@ -105,7 +105,8 @@
   <script type="module" src="js/obras.js"></script>
   <script>
     function logout() {
-      localStorage.removeItem("isLoggedIn");
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("user");
       window.location.href = "iniciosesion.html";
     }
   </script>

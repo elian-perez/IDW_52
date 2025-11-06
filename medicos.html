@@ -11,7 +11,7 @@
 <body class="bg-body-secondary min-vh-100 d-flex flex-column">
 
   <script>
-    if (localStorage.getItem("isLoggedIn") !== "true") {
+    if (!sessionStorage.getItem("accessToken")) {
       window.location.href = "iniciosesion.html";
     }
   </script>
@@ -112,10 +112,11 @@
   <script type="module" src="js/medicos.js"></script>
   <script>
     function logout() {
-      localStorage.removeItem("isLoggedIn");
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("user");
       window.location.href = "iniciosesion.html";
     }
   </script>
-</body>
+  </body>
 </html>
 

@@ -65,17 +65,43 @@ document.addEventListener("DOMContentLoaded", () => {
       imagen: imagenObra.value.trim() || "default.jpg",
     };
 
+    // 🔹 Si es edición
     if (idObra.value) {
       const index = obras.findIndex((o) => o.id === parseInt(idObra.value));
       const nombreAnterior = obras[index].nombre;
+
       obras[index] = nueva;
+      localStorage.setItem("obras", JSON.stringify(obras));
       console.log(`✏️ Obra actualizada: ${nombreAnterior} ➜ ${nueva.nombre}`);
+
+      // 🔁 ACTUALIZAR OBRAS SOCIALES EN LOS MÉDICOS
+      let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+      let cambios = 0;
+
+      medicos = medicos.map((m) => {
+        if (Array.isArray(m.obrasSociales)) {
+          const actualizadas = m.obrasSociales.map((os) =>
+            os === nombreAnterior ? nueva.nombre : os
+          );
+          if (JSON.stringify(actualizadas) !== JSON.stringify(m.obrasSociales)) {
+            cambios++;
+            return { ...m, obrasSociales: actualizadas };
+          }
+        }
+        return m;
+      });
+
+      if (cambios > 0) {
+        localStorage.setItem("medicos", JSON.stringify(medicos));
+        console.log(`🩺 Se actualizaron ${cambios} médico(s) con la nueva obra social.`);
+      }
     } else {
+      // 🔹 Si es alta
       obras.push(nueva);
+      localStorage.setItem("obras", JSON.stringify(obras));
       console.log(`🆕 Obra agregada: ${nueva.nombre}`);
     }
 
-    localStorage.setItem("obras", JSON.stringify(obras));
     mostrarObras();
     modal.hide();
   });
