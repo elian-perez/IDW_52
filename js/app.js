@@ -88,32 +88,31 @@ export const inicializarDatos = () => {
       { id: 1, nombre: "OSDE",
         telefono: "0226-5645-5664",
         email: "OSDE@osde.org",
-        
+        imagen: "logos_os/osde.jpg"
        },
       { id: 2, nombre: "Swiss Medical",
         telefono: "0810-222-3431",
-        email: "SW@WS.com.ar",
-        
+        email: "SW@MD.com.ar",
+        imagen: "logos_os/sw.jpg",
        },
       { id: 3, nombre: "Galeno",
         telefono: "011-15-2654-1456",
         email: "Gal@eno.gob.ar",
-        
+        imagen: "logos_os/galeno.jpg",
        },
       { id: 4, nombre: "Medifé",
-        telefono: "456-456",
+        telefono: "11-456-456",
         email: "obra@social.com",
-        
+        imagen: "logos_os/medife.jpg",
        },
-      { id: 5, nombre: "PAMI",
+      { id: 5, nombre: "osecac",
         telefono: "0800-000-0000",
         email: "pami@pati.org.ar",
-        
-        
+        imagen: "logos_os/osecac.webp",
        },
     ];
     localStorage.setItem("obras", JSON.stringify(obrasIniciales));
-    console.log("✅ Obras sociales iniciales cargadas.");
+    console.log("✅ Obras sociales iniciales cargadas con imágenes en logos_os/");
   }
 };
 
