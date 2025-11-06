@@ -88,22 +88,28 @@ export const inicializarDatos = () => {
       { id: 1, nombre: "OSDE",
         telefono: "0226-5645-5664",
         email: "OSDE@osde.org",
+        
        },
       { id: 2, nombre: "Swiss Medical",
         telefono: "0810-222-3431",
         email: "SW@WS.com.ar",
+        
        },
       { id: 3, nombre: "Galeno",
         telefono: "011-15-2654-1456",
         email: "Gal@eno.gob.ar",
+        
        },
       { id: 4, nombre: "Medifé",
         telefono: "456-456",
         email: "obra@social.com",
+        
        },
       { id: 5, nombre: "PAMI",
         telefono: "0800-000-0000",
         email: "pami@pati.org.ar",
+        
+        
        },
     ];
     localStorage.setItem("obras", JSON.stringify(obrasIniciales));
