@@ -120,13 +120,23 @@ function cargarProfesionales() {
   selProfesional.innerHTML = '<option value="">Seleccionar…</option>';
 
   const espId = parseInt(selEspecialidad.value);
+  const obraSelId = selObraSocial.value;
+
   const espSeleccionada = especialidades.find((e) => e.id === espId);
 
   if (!espSeleccionada) return;
 
-  const filtrados = medicos.filter(
-    (m) => m.especialidad === espSeleccionada.nombre
-  );
+  // ✅ Buscar el nombre de la obra social según el ID seleccionado
+  const obraSeleccionada = obrasSociales.find(o => o.id == obraSelId);
+  const nombreObra = obraSeleccionada ? obraSeleccionada.nombre : "";
+
+  // ✅ Filtrar por especialidad + nombre de obra social
+  const filtrados = medicos.filter((m) => {
+    const coincideEspecialidad = m.especialidad === espSeleccionada.nombre;
+    const coincideObra = nombreObra === "" || m.obrasSociales.includes(nombreObra);
+
+    return coincideEspecialidad && coincideObra;
+  });
 
   filtrados.forEach((m) => {
     const opt = document.createElement("option");
