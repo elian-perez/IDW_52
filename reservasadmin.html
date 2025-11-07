@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración de Reservas | Clínica Médica Marca Acme S.R.L.</title>
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+</head>
+
+<body class="bg-body-tertiary">
+
+    <!-- Verificación de sesión -->
+    <script>
+        if (!sessionStorage.getItem("accessToken")) {
+            window.location.href = "iniciosesion.html";
+        }
+    </script>
+
+    <!-- NAVBAR -->
+    <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
+            </a>
+            <h4 class="text-center fw-bold mb-0 flex-grow-1">Panel de Administración de Reservas</h4>
+            <button onclick="logout()" class="btn btn-outline-danger ms-3">Cerrar sesión</button>
+            <a href="paneladmin.html" class="btn btn-outline-primary ms-3">Volver al Panel</a>
+        </div>
+    </header>
+
+    <body>
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="p-4">
+            <h2>Reservas registradas</h2>
+            <table class="table" id="tablaReservas">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Documento</th>
+                        <th>Médico</th>
+                        <th>Fecha/Hora</th>
+                        <th>Obra Social</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Las reservas se cargarán aquí dinámicamente -->
+                </tbody>
+            </table>
+
+            <footer class="bg-body text-body text-center py-3 border-top mt-5">
+                <div class="container small">
+                    &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
+                </div>
+
+            </footer>
+
+        </main>
+        <script type="module" src="js/reservasadmin.js"></script>
+    </body>
+
+</html>

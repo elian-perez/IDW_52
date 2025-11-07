@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es" data-bs-theme="light">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Clínica Médica Marca Acme S.R.L. - Turnos Online</title>
+    <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="CSS/turnero.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+</head>
+
+<body class="container py-4">
+    <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
+        <div class="container d-flex justify-content-between align-items-center">
+            <a class="navbar-brand d-flex align-items-center">
+                <img src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
+            </a>
+            <h4 class="text-center fw-bold mb-0 flex-grow-1">Solicitud de Turno Online</h4>
+            <a href="index.html" class="btn btn-outline-secondary"><i class="fa-solid fa-house"></i> Volver al inicio
+                del sitio</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="text-center container my-5">
+            <h2 class="fw-bold">Bienvenido a nuestra Gestión de Turnos</h2>
+            <p class="text-muted">Seleccioná especialidad, obra social, profesional, fecha y horario.</p>
+        </div>
+
+        <!-- ESTRUCTURA DE FILTROS -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label class="form-label">Especialidad</label>
+                        <select id="selEspecialidad" class="form-select">
+                            <option value="">Seleccionar…</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Obra social</label>
+                        <select id="selObraSocial" class="form-select" disabled>
+                            <option value="">Seleccionar…</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Profesional</label>
+                        <select id="selProfesional" class="form-select" disabled>
+                            <option value="">Seleccionar…</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LISTA DE PROFESIONALES (opcional, estilo visual) -->
+        <div id="listaProfesionales" class="mb-4" style="display:none;"></div>
+
+        <!-- FECHAS Y HORARIOS -->
+        <div class="card mb-4">
+            <div class="card-body">
+
+                <h5 class="mb-3">Elegí fecha</h5>
+                <div id="diasSemana" class="d-flex gap-2 flex-wrap">
+                    <!-- JS generará botones -->
+                </div>
+
+                <hr>
+
+                <h5 class="mb-3">Horarios disponibles</h5>
+                <div id="horariosDisponibles" class="d-flex gap-2 flex-wrap">
+                    <small class="text-muted">Seleccioná un día primero.</small>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FORMULARIO DEL PACIENTE -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <h5>Tus datos</h5>
+
+                        <label class="form-label">Documento</label>
+                        <input id="inpDocumento" type="text" class="form-control">
+
+                        <label class="form-label mt-3">Apellido y nombre</label>
+                        <input id="inpNombre" type="text" class="form-control">
+                    </div>
+
+                    <div class="col-md-6">
+                        <h5>Resumen</h5>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item">Especialidad: <strong id="resEspecialidad">—</strong></li>
+                            <li class="list-group-item">Obra social: <strong id="resObra">—</strong></li>
+                            <li class="list-group-item">Profesional: <strong id="resMedico">—</strong></li>
+                            <li class="list-group-item">Fecha y hora: <strong id="resFechaHora">—</strong></li>
+                            <li class="list-group-item">Valor total: <strong id="resValor">$ —</strong></li>
+                        </ul>
+
+                        <button id="btnConfirmar" class="btn btn-primary w-100" disabled>Confirmar reserva</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <p id="mensaje" class="text-success fw-bold"></p>
+
+        </div>
+    </main>
+
+    <footer class="bg-body text-body text-center py-3 border-top mt-5">
+        <div class="container small">
+            &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
+        </div>
+
+    </footer>
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/turnero.js"></script>
+
+</body>
+</html>

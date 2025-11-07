@@ -45,8 +45,7 @@ export function mostrarMedicos() {
           <p class="card-text"><strong>Obras Sociales:</strong> ${obrasTexto}</p>
           <p class="mb-1"><strong>Tel:</strong> ${medico.telefono}</p>
           <p><strong>Email:</strong> ${medico.email}</p>
-          <a href="#turnos" class="btn btn-primary" onclick="alert('En desarrollo. Disculpe la molestia.')">Solicitar turno</a>
-        </div>
+          </div>
       </div>
     `;
 

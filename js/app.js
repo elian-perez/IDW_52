@@ -58,7 +58,6 @@ export const inicializarDatos = () => {
         email: "camilo@clinica.com",
         foto: "correcamino2.jpg",
       },
-
     ];
     localStorage.setItem("medicos", JSON.stringify(medicosIniciales));
     console.log("✅ Médicos iniciales cargados.");
@@ -78,41 +77,55 @@ export const inicializarDatos = () => {
       { id: 9, nombre: "Neurología" },
       { id: 10, nombre: "Reumatología" },
     ];
-    localStorage.setItem("especialidades", JSON.stringify(especialidadesIniciales));
+    localStorage.setItem(
+      "especialidades",
+      JSON.stringify(especialidadesIniciales)
+    );
     console.log("✅ Especialidades iniciales cargadas.");
   }
 
   // ---------- OBRAS SOCIALES ----------
   if (!localStorage.getItem("obras")) {
     const obrasIniciales = [
-      { id: 1, nombre: "OSDE",
+      {
+        id: 1,
+        nombre: "OSDE",
         telefono: "0226-5645-5664",
         email: "OSDE@osde.org",
-        imagen: "logos_os/osde.jpg"
-       },
-      { id: 2, nombre: "Swiss Medical",
+        imagen: "logos_os/osde.jpg",
+      },
+      {
+        id: 2,
+        nombre: "Swiss Medical",
         telefono: "0810-222-3431",
         email: "SW@MD.com.ar",
         imagen: "logos_os/sw.jpg",
-       },
-      { id: 3, nombre: "Galeno",
+      },
+      {
+        id: 3,
+        nombre: "Galeno",
         telefono: "011-15-2654-1456",
         email: "Gal@eno.gob.ar",
         imagen: "logos_os/galeno.jpg",
-       },
-      { id: 4, nombre: "Medifé",
+      },
+      {
+        id: 4,
+        nombre: "Medifé",
         telefono: "11-456-456",
         email: "obra@social.com",
         imagen: "logos_os/medife.jpg",
-       },
-      { id: 5, nombre: "OSECAC",
+      },
+      {
+        id: 5,
+        nombre: "OSECAC",
         telefono: "0800-000-0000",
         email: "osecac@obr.org.ar",
         imagen: "logos_os/osecac.webp",
-       },
+      },
     ];
     localStorage.setItem("obras", JSON.stringify(obrasIniciales));
-    console.log("✅ Obras sociales iniciales cargadas con imágenes en logos_os/");
+    console.log(
+      "✅ Obras sociales iniciales cargadas con imágenes en logos_os/"
+    );
   }
 };
-
