@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel de Administración | Usuarios</title>
+  <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="icon" href="img/icono-nav.png" type="image/x-icon" />
+</head>
+
+<body class="bg-body-tertiary">
+
+  <!-- ✅ Verificación de sesión -->
+  <script>
+    if (!sessionStorage.getItem("accessToken")) {
+      window.location.href = "iniciosesion.html";
+    }
+  </script>
+
+  <!-- ✅ NAVBAR -->
+  <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand d-flex align-items-center" href="index.html">
+        <img src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
+      </a>
+      <h4 class="text-center fw-bold mb-0 flex-grow-1">Panel de Administración de Usuarios</h4>
+      <button onclick="logout()" class="btn btn-outline-danger ms-3">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <!-- ✅ CONTENIDO PRINCIPAL -->
+  <main class="container my-5">
+    <div class="text-center mb-4">
+      <h2 class="fw-bold">Usuarios registrados</h2>
+      <p class="text-muted">Visualización de todos los usuarios del sistema (sin datos sensibles).</p>
+    </div>
+
+    <div class="table-responsive shadow-sm rounded">
+      <table id="tablaUsuarios" class="table table-striped align-middle">
+        <thead class="table-dark">
+          <tr>
+            <th>ID</th>
+            <th>Nombre completo</th>
+            <th>Email</th>
+            <th>Teléfono</th>
+            <th>Edad</th>
+            <th>Foto</th>
+          </tr>
+        </thead>
+        <tbody id="usuariosBody">
+          <tr>
+            <td colspan="6" class="text-center text-muted">Cargando usuarios...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="text-center mt-4">
+      <a href="paneladmin.html" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-arrow-left"></i> Volver al Panel
+      </a>
+    </div>
+  </main>
+
+  <!-- ✅ FOOTER -->
+  <footer class="bg-body text-body text-center py-3 border-top mt-5">
+    <div class="container small">
+      &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
+    </div>
+  </footer>
+
+  <!-- ✅ JS -->
+  <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/usuariosadmin.js"></script>
+  <script>
+    function logout() {
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("user");
+      window.location.href = "iniciosesion.html";
+    }
+  </script>
+</body>
+</html>
+
