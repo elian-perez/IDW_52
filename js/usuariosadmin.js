@@ -1,34 +1,30 @@
 
-// Al cargar la página, ejecutamos la función
-document.addEventListener("DOMContentLoaded", cargarUsuarios);
+document.addEventListener("DOMContentLoaded", async () => {
+  const tbody = document.getElementById("usuariosBody");
 
-function cargarUsuarios() {
-  fetch("https://dummyjson.com/users")
-    .then(response => response.json())
-    .then(data => {
-      mostrarUsuarios(data.users);
-    })
-    .catch(error => {
-      console.error("Error al cargar los usuarios:", error);
+  try {
+    const response = await fetch("https://dummyjson.com/users");
+    if (!response.ok) throw new Error("Error al obtener los usuarios");
+
+    const data = await response.json();
+    const usuarios = data.users;
+
+    tbody.innerHTML = ""; // Limpia el mensaje "Cargando usuarios..."
+
+    usuarios.forEach(user => {
+      const fila = document.createElement("tr");
+      fila.innerHTML = `
+        <td>${user.id}</td>
+        <td>${user.firstName} ${user.lastName}</td>
+        <td>${user.email}</td>
+        <td>${user.phone}</td>
+        <td>${user.age}</td>
+      `;
+      tbody.appendChild(fila);
     });
-}
 
-function mostrarUsuarios(usuarios) {
-  const cuerpoTabla = document.getElementById("usuariosBody");
-
-  usuarios.forEach(usuario => {
-    // Excluimos campos sensibles como password, dirección completa, etc.
-    const fila = document.createElement("tr");
-
-    fila.innerHTML = `
-      <td>${usuario.id}</td>
-      <td>${usuario.firstName} ${usuario.lastName}</td>
-      <td>${usuario.email}</td>
-      <td>${usuario.phone}</td>
-      <td>${usuario.age}</td>
-      <td><img src="${usuario.image}" alt="foto" width="50" /></td>
-    `;
-
-    cuerpoTabla.appendChild(fila);
-  });
-}
+  } catch (error) {
+    console.error("❌ Error al cargar usuarios:", error);
+    tbody.innerHTML = `<tr><td colspan="5" class="text-danger">Error al cargar usuarios.</td></tr>`;
+  }
+});
