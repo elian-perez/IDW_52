@@ -12,8 +12,8 @@ document.addEventListener("DOMContentLoaded", () => {
   const selectEspecialidad = document.getElementById("especialidad");
   const obrasContainer = document.getElementById("obrasSocialesContainer");
 
-  // 🔹 Obtener datos actualizados del localStorage
-  function obtenerDatosActualizados() {
+  
+  function obtenerDatos() {
     return {
       medicos: JSON.parse(localStorage.getItem("medicos")) || [],
       especialidades: JSON.parse(localStorage.getItem("especialidades")) || [],
@@ -21,44 +21,43 @@ document.addEventListener("DOMContentLoaded", () => {
     };
   }
 
-  // 🔹 Inicializar datos
-  let { medicos } = obtenerDatosActualizados();
+  let { medicos } = obtenerDatos();
 
-  // 🔹 Cargar opciones dinámicamente
+  
   const cargarOpciones = () => {
-    const { especialidades, obras } = obtenerDatosActualizados();
+    const { especialidades, obras } = obtenerDatos();
 
     selectEspecialidad.innerHTML = especialidades
       .map(e => `<option value="${e.nombre}">${e.nombre}</option>`)
       .join("");
 
     obrasContainer.innerHTML = obras
-      .map(
-        o => `
+      .map(o => `
         <div class="form-check">
           <input class="form-check-input" type="checkbox" value="${o.nombre}" id="obra-${o.id}">
           <label class="form-check-label" for="obra-${o.id}">${o.nombre}</label>
         </div>
-      `
-      )
+      `)
       .join("");
   };
 
   cargarOpciones();
 
-  // 🔹 Renderizar médicos
+  
   const mostrarMedicos = () => {
     medicos = JSON.parse(localStorage.getItem("medicos")) || [];
     tablaMedicos.innerHTML = "";
+
     medicos.forEach((m, i) => {
       const fila = document.createElement("tr");
       fila.innerHTML = `
         <td>${m.id}</td>
-        <td>${m.nombre}</td>
+        <td>${m.nombreApellido}</td>
         <td>${m.especialidad}</td>
         <td>${(m.obrasSociales || []).join(", ")}</td>
-        <td>${m.telefono}</td>
-        <td>${m.email}</td>
+        <td>${m.matricula}</td>
+        <td>${m.descripcion}</td>
+        <td>$${m.valor}</td>
         <td><img src="img/${m.foto}" width="60" class="rounded"><div class="small text-muted">${m.foto}</div></td>
         <td>
           <button class="btn btn-warning btn-sm btnEditar" data-index="${i}">Editar</button>
@@ -71,7 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mostrarMedicos();
 
-  // 🔹 Nuevo médico
+ 
   btnNuevo.addEventListener("click", () => {
     formMedico.reset();
     idMedico.value = "";
@@ -79,7 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.show();
   });
 
-  // 🔹 Guardar médico
+  
   formMedico.addEventListener("submit", e => {
     e.preventDefault();
 
@@ -91,21 +90,22 @@ document.addEventListener("DOMContentLoaded", () => {
       id: idMedico.value
         ? parseInt(idMedico.value)
         : medicos.length ? medicos[medicos.length - 1].id + 1 : 1,
-      nombre: document.getElementById("nombre").value.trim(),
+      nombreApellido: document.getElementById("nombreApellido").value.trim(),
       especialidad: selectEspecialidad.value,
       obrasSociales: obrasSeleccionadas,
-      telefono: document.getElementById("telefono").value.trim(),
-      email: document.getElementById("email").value.trim(),
-      foto: document.getElementById("foto").value.trim() || "default.jpg",
+      matricula: document.getElementById("matricula").value.trim(),
+      descripcion: document.getElementById("descripcion").value.trim(),
+      valor: document.getElementById("valor").value.trim(),
+      foto: document.getElementById("foto").value.trim() || "default.jpg"
     };
 
     if (idMedico.value) {
       const i = medicos.findIndex(m => m.id === parseInt(idMedico.value));
       medicos[i] = nuevoMedico;
-      console.log(`✏️ Médico actualizado: ${nuevoMedico.nombre}`);
+      console.log(`✏️ Médico actualizado: ${nuevoMedico.nombreApellido}`);
     } else {
       medicos.push(nuevoMedico);
-      console.log(`🩺 Médico agregado: ${nuevoMedico.nombre}`);
+      console.log(`🩺 Médico agregado: ${nuevoMedico.nombreApellido}`);
     }
 
     localStorage.setItem("medicos", JSON.stringify(medicos));
@@ -113,26 +113,26 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.hide();
   });
 
-  // 🔹 Editar / Eliminar
+  
   tablaMedicos.addEventListener("click", e => {
     const i = e.target.dataset.index;
     if (e.target.classList.contains("btnEditar")) {
       const m = medicos[i];
       idMedico.value = m.id;
-      document.getElementById("nombre").value = m.nombre;
+      document.getElementById("nombreApellido").value = m.nombreApellido;
       selectEspecialidad.value = m.especialidad;
       obrasContainer.querySelectorAll("input[type='checkbox']").forEach(cb => {
         cb.checked = m.obrasSociales.includes(cb.value);
       });
-      document.getElementById("telefono").value = m.telefono;
-      document.getElementById("email").value = m.email;
+      document.getElementById("matricula").value = m.matricula;
+      document.getElementById("descripcion").value = m.descripcion;
+      document.getElementById("valor").value = m.valor;
       document.getElementById("foto").value = m.foto;
       modal.show();
     }
 
     if (e.target.classList.contains("btnEliminar")) {
-      const m = medicos[i];
-      if (confirm(`¿Eliminar al médico ${m.nombre}?`)) {
+      if (confirm(`¿Eliminar al médico ${medicos[i].nombreApellido}?`)) {
         medicos.splice(i, 1);
         localStorage.setItem("medicos", JSON.stringify(medicos));
         mostrarMedicos();
@@ -140,13 +140,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 🔁 Actualizar si cambian obras o especialidades desde otras páginas
-  window.addEventListener("storage", (event) => {
+  
+  window.addEventListener("storage", event => {
     if (["especialidades", "obras"].includes(event.key)) {
-      console.log("🔄 Cambios detectados en", event.key, "→ recargando opciones...");
       cargarOpciones();
       mostrarMedicos();
     }
   });
 });
+
 
