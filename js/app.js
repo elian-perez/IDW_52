@@ -96,42 +96,36 @@ export const inicializarDatos = () => {
       {
         id: 1,
         nombre: "OSDE",
-        telefono: "0226-5645-5664",
-        email: "OSDE@osde.org",
+        descripcion: "Cobertura médica integral a nivel nacional.",
         imagen: "logos_os/osde.jpg",
       },
       {
         id: 2,
         nombre: "Swiss Medical",
-        telefono: "0810-222-3431",
-        email: "SW@MD.com.ar",
+        descripcion: "Servicios médicos de alta complejidad con amplia red de prestadores.",
         imagen: "logos_os/sw.jpg",
       },
       {
         id: 3,
         nombre: "Galeno",
-        telefono: "011-15-2654-1456",
-        email: "Gal@eno.gob.ar",
+        descripcion: "Atención médica personalizada con planes adaptados a cada necesidad.",
         imagen: "logos_os/galeno.jpg",
       },
       {
         id: 4,
         nombre: "Medifé",
-        telefono: "11-456-456",
-        email: "obra@social.com",
+        descripcion: "Cobertura médica con enfoque en prevención y bienestar.",
         imagen: "logos_os/medife.jpg",
       },
       {
         id: 5,
         nombre: "OSECAC",
-        telefono: "0800-000-0000",
-        email: "osecac@obr.org.ar",
+        descripcion: "Obra social de empleados de comercio con cobertura nacional.",
         imagen: "logos_os/osecac.webp",
       },
     ];
     localStorage.setItem("obras", JSON.stringify(obrasIniciales));
-    console.log(
-      "✅ Obras sociales iniciales cargadas con imágenes en logos_os/"
-    );
+    console.log("✅ Obras sociales iniciales cargadas (con descripción).");
   }
+
 };

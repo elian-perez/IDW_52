@@ -1,6 +1,6 @@
 import { inicializarDatos } from "./app.js";
 
-console.log("🏥 obrasindex.js cargado correctamente");
+console.log("🏥 obrasindex.js (versión con descripción) cargado correctamente");
 inicializarDatos();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -30,8 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         >
         <div class="card-body p-2">
           <h5 class="card-title fw-bold">${obra.nombre}</h5>
-          <p class="card-text mb-1"><strong>Tel:</strong> ${obra.telefono || "-"}</p>
-          <p class="card-text mb-2"><strong>Email:</strong> ${obra.email || "-"}</p>
+          <p class="card-text mb-0">${obra.descripcion || ""}</p>
         </div>
       </div>
     `;
@@ -39,5 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     contenedor.appendChild(card);
   });
 });
+
 
 

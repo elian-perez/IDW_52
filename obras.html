@@ -6,6 +6,20 @@
   <title>Administración - Obras Sociales</title>
   <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+
+  <style>
+    .modal-content {
+      border-radius: 1rem;
+    }
+    .modal-header {
+      background-color: #0d6efd;
+      color: #fff;
+      border-bottom: none;
+    }
+    .modal-footer {
+      border-top: none;
+    }
+  </style>
 </head>
 
 <body class="bg-body-secondary min-vh-100 d-flex flex-column">
@@ -44,8 +58,7 @@
           <tr>
             <th>ID</th>
             <th>Nombre</th>
-            <th>Teléfono</th>
-            <th>Email</th>
+            <th>Descripción</th>
             <th>Imagen</th>
             <th>Acciones</th>
           </tr>
@@ -55,44 +68,59 @@
     </div>
 
     <!-- 💬 Modal Obra Social -->
-    <div class="modal fade" id="modalObra" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
+    <div class="modal fade" id="modalObra" tabindex="-1" aria-labelledby="modalObraLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
           <div class="modal-header">
-            <h5 class="modal-title">Agregar / Editar Obra Social</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <h5 class="modal-title fw-bold" id="modalObraLabel">Agregar / Editar Obra Social</h5>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
           </div>
-          <div class="modal-body">
-            <form id="formObra">
+
+          <form id="formObra" class="needs-validation" novalidate>
+            <div class="modal-body">
               <input type="hidden" id="idObra">
 
               <div class="mb-3">
-                <label for="nombreObra" class="form-label">Nombre</label>
-                <input type="text" id="nombreObra" class="form-control" required>
+                <label for="nombreObra" class="form-label fw-semibold">Nombre</label>
+                <input type="text" id="nombreObra" class="form-control" placeholder="Ej: OSDE, Galeno..." required>
+                <div class="invalid-feedback">El nombre es obligatorio.</div>
               </div>
 
               <div class="mb-3">
-                <label for="telefonoObra" class="form-label">Teléfono</label>
-                <input type="text" id="telefonoObra" class="form-control">
+                <label for="descripcionObra" class="form-label fw-semibold">Descripción</label>
+                <textarea 
+                  id="descripcionObra" 
+                  class="form-control" 
+                  rows="3" 
+                  placeholder="Ej: Cobertura médica integral a nivel nacional."
+                  required
+                ></textarea>
+                <div class="invalid-feedback">La descripción es obligatoria.</div>
               </div>
 
               <div class="mb-3">
-                <label for="emailObra" class="form-label">Email</label>
-                <input type="email" id="emailObra" class="form-control">
+                <label for="imagenObra" class="form-label fw-semibold">Imagen (ruta o nombre de archivo)</label>
+                <input type="text" id="imagenObra" class="form-control" placeholder="Ej: logos_os/osde.jpg">
+                <div class="form-text">
+                  Guardá las imágenes en <code>img/logos_os/</code>.  
+                  Si dejás vacío, se usará <strong>default.jpg</strong>.
+                </div>
               </div>
+            </div>
 
-              <div class="mb-3">
-                <label for="imagenObra" class="form-label">Imagen (archivo en /img/logos_os)</label>
-                <input type="text" id="imagenObra" class="form-control" placeholder="ej: logos_os/osde.jpg">
-              </div>
-
-              <button type="submit" class="btn btn-primary w-100">Guardar</button>
-            </form>
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                <i class="fa-solid fa-xmark"></i> Cancelar
+              </button>
+              <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-floppy-disk"></i> Guardar
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
-
+  </main>
 
   <footer class="bg-body text-body text-center py-3 border-top mt-5">
     <div class="container small">
@@ -104,7 +132,6 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="js/obras.js"></script>
 
-
   <script>
     function logout() {
       sessionStorage.removeItem("accessToken");
@@ -114,4 +141,5 @@
   </script>
 </body>
 </html>
+
 
