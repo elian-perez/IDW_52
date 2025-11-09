@@ -25,10 +25,15 @@ export function mostrarMedicos() {
         ? medico.obrasSociales.join(", ")
         : "Sin cobertura";
 
+    // Aseguramos que la foto tenga siempre la carpeta correcta
+    const rutaImagen = medico.foto
+      ? `img/${medico.foto}`
+      : "img/default.jpg";
+
     card.innerHTML = `
       <div class="card h-100 shadow-sm">
-        <img src="img/${medico.foto || 'default.jpg'}"
-          alt="${medico.nombre}"
+        <img src="${rutaImagen}"
+          alt="${medico.nombreApellido}"
           class="card-img-top rounded-top"
           style="
             width: 100%;
@@ -40,12 +45,13 @@ export function mostrarMedicos() {
           ">
 
         <div class="card-body text-center">
-          <h5 class="card-title">${medico.nombre}</h5>
+          <h5 class="card-title">${medico.nombreApellido}</h5>
           <p class="card-text"><strong>Especialidad:</strong> ${medico.especialidad}</p>
           <p class="card-text"><strong>Obras Sociales:</strong> ${obrasTexto}</p>
-          <p class="mb-1"><strong>Tel:</strong> ${medico.telefono}</p>
-          <p><strong>Email:</strong> ${medico.email}</p>
-          </div>
+          <p class="card-text"><strong>Matrícula:</strong> ${medico.matricula}</p>
+          <p class="card-text"><strong>Valor Consulta:</strong> $${medico.valor}</p>
+          <p class="card-text">${medico.descripcion}</p>
+        </div>
       </div>
     `;
 
@@ -54,4 +60,6 @@ export function mostrarMedicos() {
 }
 
 document.addEventListener("DOMContentLoaded", mostrarMedicos);
+
+
 
