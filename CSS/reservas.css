@@ -1,0 +1,73 @@
+
+/* === ESTILOS GENERALES DE LOS PANELES === */
+
+body {
+  background-color: #f8f9fa;
+}
+
+main {
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+  margin-bottom: 20px;
+  font-weight: 600;
+  color: #212529;
+}
+
+table {
+  width: 100%;
+}
+
+table th,
+table td {
+  vertical-align: middle;
+}
+
+.table thead th {
+  background-color: #212529;
+  color: #fff;
+}
+
+footer {
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+}
+
+
+/* ======================================
+   ESTILOS TABLA DE RESERVAS - ADMIN
+   ====================================== */
+
+#tablaReservas thead th {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+}
+
+#tablaReservas tbody td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+#tablaReservas th,
+#tablaReservas td {
+  padding: 10px 12px;
+}
+
+.table {
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* ===== Título principal ===== */
+main h2 {
+  text-align: center;
+  font-weight: 700;
+  margin: 2rem 0;
+}

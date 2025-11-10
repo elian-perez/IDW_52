@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Administración de Reservas | Clínica Médica Marca Acme S.R.L.</title>
     <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="CSS/reservas.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
 </head>
@@ -34,16 +35,24 @@
     <body>
         <!-- CONTENIDO PRINCIPAL -->
         <main class="p-4">
-            <h2>Reservas registradas</h2>
-            <table class="table" id="tablaReservas">
-                <thead>
+            <h2 class="text-center my-4 fw-bold">Reservas registradas</h2>
+
+                        
+            <table class="table table-bordered table-striped table-hover text-center align-middle shadow-sm" id="tablaReservas">
+
+
+
+                <thead class="table-dark">
                     <tr>
                         <th>ID</th>
                         <th>Paciente</th>
                         <th>Documento</th>
                         <th>Médico</th>
+                        <th>Especialidad</th>
+                        <th>Valor Consulta</th>
                         <th>Fecha/Hora</th>
                         <th>Obra Social</th>
+                        <th>Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
