@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", async () => {
   const tbody = document.getElementById("usuariosBody");
 
@@ -7,14 +6,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     if (!response.ok) throw new Error("Error al obtener los usuarios");
 
     const data = await response.json();
-    const usuarios = data.users;
+    let usuarios = data.users;
+
+    // 🔹 1. Filtrar solo los usuarios cuyo rol sea "user"
+    usuarios = usuarios.filter(user => user.role === "user");
 
     tbody.innerHTML = ""; // Limpia el mensaje "Cargando usuarios..."
 
-    usuarios.forEach(user => {
+    // 🔹 2. Mostrar IDs personalizados empezando desde 1
+    usuarios.forEach((user, index) => {
       const fila = document.createElement("tr");
       fila.innerHTML = `
-        <td>${user.id}</td>
+        <td>${index + 1}</td>
         <td>${user.firstName} ${user.lastName}</td>
         <td>${user.email}</td>
         <td>${user.phone}</td>
@@ -25,6 +28,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   } catch (error) {
     console.error("❌ Error al cargar usuarios:", error);
-    tbody.innerHTML = `<tr><td colspan="5" class="text-danger">Error al cargar usuarios.</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="5" class="text-danger text-center">Error al cargar usuarios.</td></tr>`;
   }
 });
+
+
