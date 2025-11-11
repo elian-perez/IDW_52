@@ -19,6 +19,13 @@ function cargarDatos() {
   reservas = JSON.parse(localStorage.getItem("reservas")) || [];
 }
 
+function obtenerValorConDescuento(reserva) {
+  if (reserva.obraSocial && reserva.obraSocial !== "Sin obra social") {
+    return reserva.valorConsulta; 
+  }
+  return reserva.valorConsulta;
+}
+
 function renderTabla() {
   tabla.innerHTML = "";
 
@@ -33,9 +40,9 @@ function renderTabla() {
       <td>${r.documento}</td>
       <td>${med ? med.nombreApellido : "—"}</td>
       <td>${med ? med.especialidad : "—"}</td>
-      <td>$${med ? med.valor : "—"}</td>
+      <td>${r.valorConsulta ? r.valorConsulta : `$${med ? med.valor : "—"}`}</td>
       <td>${r.fechaHora}</td>
-      <td>${ob ? ob.nombre : "Sin obra social"}</td>
+      <td>${r.obraSocial ? r.obraSocial : (ob ? ob.nombre : "Sin obra social")}</td>
       <td>
         <button class="btn btn-sm btn-danger" onclick="eliminarReserva(${r.id})">
           <i class="fa-solid fa-trash"></i> Eliminar

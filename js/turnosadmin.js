@@ -26,7 +26,7 @@ function cargarMedicos() {
   medicos.forEach(m => {
     const o = document.createElement("option");
     o.value = m.id;
-    o.textContent = m.nombre;
+    o.textContent = m.nombreApellido;
     selMedico.appendChild(o);
   });
 }
@@ -48,45 +48,36 @@ btnCrear.addEventListener("click", () => {
 
 function renderTabla() {
   tabla.innerHTML = "";
-  turnos.forEach(t => {
-    const med = medicos.find(m => m.id === t.medicoId);
+  turnos.forEach((t) => {
+    const med = medicos.find((m) => m.id === t.medicoId);
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
       <td>${t.id}</td>
-      <td>${med?.nombre}</td>
+      <td>${med?.nombreApellido || "—"}</td>
       <td>${t.dia}</td>
       <td>${t.hora}</td>
-      <td>${t.disponible ? "Sí" : "No"}</td>
       <td>
-        <button class="btn btn-danger btn-sm" onclick="eliminarTurno(${t.id})">Eliminar</button>
+        <select onchange="cambiarDisponibilidad(${t.id}, this.value)">
+          <option value="true" ${t.disponible ? "selected" : ""}>Sí</option>
+          <option value="false" ${!t.disponible ? "selected" : ""}>No</option>
+        </select>
+      </td>
+      <td>
+        <button class="btn btn-danger btn-sm" onclick="eliminarTurno(${t.id})">
+          Eliminar
+        </button>
       </td>
     `;
     tabla.appendChild(tr);
   });
 }
 
-window.eliminarTurno = function(id) {
-  turnos = turnos.filter(t => t.id !== id);
+window.cambiarDisponibilidad = function (id, valor) {
+  turnos = turnos.map((t) =>
+    t.id === id ? { ...t, disponible: valor === "true" } : t
+  );
+
   localStorage.setItem("turnos", JSON.stringify(turnos));
   renderTabla();
 };
-
-window.habilitarTurno = function(idTurno) {
-  marcarTurnoComoDisponible(idTurno);
-  cargarDatos();
-  renderTabla();
-};
-
-function marcarTurnoComoDisponible(idTurno) {
-  let turnos = JSON.parse(localStorage.getItem("turnos")) || [];
-
-  turnos = turnos.map(t => {
-    if (t.id === idTurno) {
-      return { ...t, disponible: true };
-    }
-    return t;
-  });
-
-  localStorage.setItem("turnos", JSON.stringify(turnos));
-}

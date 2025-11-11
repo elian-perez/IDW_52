@@ -114,6 +114,11 @@ function cargarObrasSociales() {
     opt.textContent = os.nombre;
     selObraSocial.appendChild(opt);
   });
+
+  const particularOpt = document.createElement("option");
+  particularOpt.value = "particular";
+  particularOpt.textContent = "Atención particular (sin obra social)";
+  selObraSocial.appendChild(particularOpt);
 }
 
 function cargarProfesionales() {
@@ -127,13 +132,14 @@ function cargarProfesionales() {
   if (!espSeleccionada) return;
 
   // ✅ Buscar el nombre de la obra social según el ID seleccionado
-  const obraSeleccionada = obrasSociales.find(o => o.id == obraSelId);
+  const obraSeleccionada = obrasSociales.find((o) => o.id == obraSelId);
   const nombreObra = obraSeleccionada ? obraSeleccionada.nombre : "";
 
   // ✅ Filtrar por especialidad + nombre de obra social
   const filtrados = medicos.filter((m) => {
     const coincideEspecialidad = m.especialidad === espSeleccionada.nombre;
-    const coincideObra = nombreObra === "" || m.obrasSociales.includes(nombreObra);
+    const coincideObra =
+      nombreObra === "" || m.obrasSociales.includes(nombreObra);
 
     return coincideEspecialidad && coincideObra;
   });
@@ -141,7 +147,7 @@ function cargarProfesionales() {
   filtrados.forEach((m) => {
     const opt = document.createElement("option");
     opt.value = m.id;
-    opt.textContent = m.nombre;
+    opt.textContent = m.nombreApellido;
     selProfesional.appendChild(opt);
   });
 }
@@ -170,7 +176,7 @@ function mostrarProfesionalCard() {
                  width="80" height="80" />
 
             <div>
-                <h5 class="card-title mb-1">${medico.nombre}</h5>
+                <h5 class="card-title mb-1">${medico.nombreApellido}</h5>
                 <p class="text-muted mb-1">${medico.especialidad}</p>
                 <small class="text-muted">${
                   medico.direccion || "Dirección no cargada"
@@ -190,12 +196,12 @@ function cargarDias() {
   if (!medicoId) return;
 
   // filtrar turnos reales del medico
-  const turnosMedico = turnos.filter(t => t.medicoId === medicoId);
+  const turnosMedico = turnos.filter((t) => t.medicoId === medicoId);
 
   // obtener los días disponibles sin repetir
-  const dias = [...new Set(turnosMedico.map(t => t.dia))];
+  const dias = [...new Set(turnosMedico.map((t) => t.dia))];
 
-  dias.forEach(dia => {
+  dias.forEach((dia) => {
     const btn = document.createElement("button");
     btn.className = "btn btn-outline-primary btn-sm m-1";
     btn.textContent = capitalizar(dia);
@@ -207,7 +213,8 @@ function cargarDias() {
   });
 
   if (dias.length === 0) {
-    diasSemanaDiv.innerHTML = "<small class='text-muted'>No hay turnos para este médico.</small>";
+    diasSemanaDiv.innerHTML =
+      "<small class='text-muted'>No hay turnos para este médico.</small>";
   }
 }
 
@@ -224,7 +231,7 @@ function seleccionarDia(btn) {
   const dia = btn.dataset.dia;
   cargarHorarios(dia);
 
-  resFechaHora.textContent = capitalizar(dia); // hora después se agrega
+  resFechaHora.textContent = capitalizar(dia);
 }
 
 function cargarHorarios(dia) {
@@ -232,26 +239,27 @@ function cargarHorarios(dia) {
 
   const medicoId = parseInt(selProfesional.value);
 
-  // turnos del medico y del dia
   const turnosDia = turnos
-    .filter(t => t.medicoId === medicoId && t.dia === dia)
-    .sort((a, b) => a.hora.localeCompare(b.hora)); // ORDENADOS
+    .filter(
+      (t) =>
+        t.medicoId === medicoId &&
+        t.dia.toLowerCase() === dia.toLowerCase() &&
+        t.disponible
+    )
+    .sort((a, b) => a.hora.localeCompare(b.hora));
 
   if (turnosDia.length === 0) {
-    horariosDiv.innerHTML = "<small class='text-muted'>No hay horarios disponibles.</small>";
+    horariosDiv.innerHTML =
+      "<small class='text-muted'>No hay horarios disponibles.</small>";
     return;
   }
 
-  turnosDia.forEach(t => {
+  turnosDia.forEach((t) => {
     const btn = document.createElement("button");
     btn.className = "btn btn-outline-secondary btn-sm m-1";
     btn.textContent = t.hora;
     btn.dataset.idTurno = t.id;
     btn.dataset.hora = t.hora;
-
-    if (!t.disponible) {
-      btn.disabled = true;
-    }
 
     btn.addEventListener("click", () => seleccionarHorario(btn));
 
@@ -260,16 +268,29 @@ function cargarHorarios(dia) {
 }
 
 function seleccionarHorario(btn) {
-  horariosDiv
-    .querySelectorAll("button")
-    .forEach((b) => b.classList.remove("active"));
+  const estaActivo = btn.classList.contains("active");
+  const diaSeleccionado =
+    diasSemanaDiv.querySelector(".active")?.dataset.dia || "—";
+
+  if (estaActivo) {
+    btn.classList.remove("active");
+    btnConfirmar.disabled = true;
+
+    resFechaHora.textContent = capitalizar(diaSeleccionado);
+
+    horariosDiv.querySelectorAll("button").forEach((b) => (b.disabled = false));
+    return;
+  }
+
+  horariosDiv.querySelectorAll("button").forEach((b) => {
+    b.classList.remove("active");
+    b.disabled = b !== btn;
+  });
+
   btn.classList.add("active");
 
   const hora = btn.dataset.hora;
-  const dia = resFechaHora.textContent;
-
-  resFechaHora.textContent = `${dia} ${hora}`;
-
+  resFechaHora.textContent = `${capitalizar(diaSeleccionado)} ${hora}`;
   btnConfirmar.disabled = false;
 }
 
@@ -279,8 +300,24 @@ function actualizarResumen() {
   const med = medicos.find((m) => m.id == selProfesional.value);
 
   resEspecialidad.textContent = esp ? esp.nombre : "—";
-  resObra.textContent = os ? os.nombre : "—";
-  resMedico.textContent = med ? med.nombre : "—";
+  resObra.textContent = os
+    ? os.nombre
+    : selObraSocial.value === "particular"
+    ? "Atención particular"
+    : "—";
+  resMedico.textContent = med ? med.nombreApellido : "—";
+
+  if (med) {
+    let valorConsulta = parseFloat(med.valor);
+
+    if (selObraSocial.value && selObraSocial.value !== "particular") {
+      valorConsulta = valorConsulta * 0.6; // 40% de descuento
+    }
+
+    resValor.textContent = `$ ${valorConsulta.toFixed(2)}`;
+  } else {
+    resValor.textContent = "$ —";
+  }
 }
 
 function confirmarReserva() {
@@ -301,16 +338,30 @@ function confirmarReserva() {
   // ID único
   const idReserva = Date.now();
 
+  const espSeleccionada = especialidades.find(
+    (e) => e.id == especialidadId
+  ) || { nombre: "—" };
+  const obraSeleccionada = obrasSociales.find((o) => o.id == obraId) || {
+    nombre: "Sin obra social",
+  };
+  const medico = medicos.find((m) => m.id == medicoId) || {
+    nombreApellido: "—",
+  };
+
+  const valorConsulta = calcularValorTotal(especialidadId, obraId);
+
   // Objeto reserva
   const reserva = {
     id: idReserva,
     documento: documento,
     paciente: nombre,
-    especialidadId: especialidadId,
-    obraId: obraId,
-    medicoId: medicoId,
+    medicoNombre: medico.nombreApellido,
+    especialidad: espSeleccionada.nombre,
+    valorConsulta: `$ ${valorConsulta}`,
     fechaHora: fechaHora,
-    total: calcularValorTotal(especialidadId, obraId),
+    obraSocial:
+      obraId === "particular" ? "Sin obra social" : obraSeleccionada.nombre,
+    medicoId: medicoId,
   };
 
   // Guardar reserva
@@ -319,20 +370,56 @@ function confirmarReserva() {
   localStorage.setItem("reservas", JSON.stringify(reservas));
 
   marcarTurnoComoOcupado(medicoId, fechaHora);
-
   mostrarMensajeExito();
+  
+  const resumen = `
+  <div style="font-family: sans-serif; text-align: left; padding: 10px;">
+    <h5 style="margin-bottom: 10px;">Reserva confirmada ✅</h5>
+    <p><strong>Paciente:</strong> ${nombre}</p>
+    <p><strong>Médico:</strong> ${medico.nombreApellido}</p>
+    <p><strong>Especialidad:</strong> ${espSeleccionada.nombre}</p>
+    <p><strong>Obra social:</strong> ${
+      obraId === "particular" ? "Sin obra social" : obraSeleccionada.nombre
+    }</p>
+    <p><strong>Fecha y hora:</strong> ${fechaHora}</p>
+    <p><strong>Valor consulta:</strong> $${valorConsulta}</p>
+    <hr>
+    <p style="color: gray;">La página se actualizará automáticamente en 7 segundos...</p>
+  </div>
+`;
+
+  const ventana = window.open("", "Resumen de reserva", "width=400,height=450");
+  ventana.document.write(resumen);
+  ventana.document.title = "Reserva confirmada";
+
+  setTimeout(() => {
+    ventana.close(); // cerrar ventana emergente
+    window.location.reload(); // recargar la página principal
+  }, 7000);
+
   btnConfirmar.disabled = true;
+
+  horariosDiv.querySelectorAll("button").forEach((b) => (b.disabled = false));
 }
 
-
 function calcularValorTotal(espId, obraId) {
-  return 1000;
+  const med = medicos.find((m) => m.id == selProfesional.value);
+  if (!med) return 0;
+
+  let valor = parseFloat(med.valor) || 0;
+
+  if (obraId && obraId !== "particular") {
+    const descuento = 0.4;
+    valor = valor * (1 - descuento);
+  }
+
+  return valor.toFixed(2);
 }
 
 function marcarTurnoComoOcupado(medicoId, fechaHora) {
   let turnos = JSON.parse(localStorage.getItem("turnos")) || [];
 
-  turnos = turnos.map(t => {
+  turnos = turnos.map((t) => {
     const turnoFechaHora = `${capitalizar(t.dia)} ${t.hora}`;
     if (t.medicoId == medicoId && turnoFechaHora === fechaHora) {
       return { ...t, disponible: false };
