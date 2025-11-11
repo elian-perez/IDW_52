@@ -12,20 +12,32 @@
     <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
 </head>
 
-<body class="container py-4">
-    <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
-        <div class="container d-flex justify-content-between align-items-center">
+<body class="bg-body bg-gradient">
+    <header class="navbar navbar-expand-lg bg-body-tertiary text-body sticky-top">
+        <div class="container">
             <a class="navbar-brand d-flex align-items-center">
-                <img src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
+               <img src="img/logo2.png" alt="Logo-clinica" style="max-height: 100px; width: auto" />
             </a>
-            <h4 class="text-center fw-bold mb-0 flex-grow-1">Solicitud de Turno Online</h4>
-            <a href="index.html" class="btn btn-outline-secondary"><i class="fa-solid fa-house"></i> Volver al inicio
-                del sitio</a>
-            <button id="btnTheme" class="btn btn-outline-dark ms-3">🌙</button>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!--<h4 class="text-center fw-bold mb-0 flex-grow-1">Solicitud de Turno Online</h4>-->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto d-flex align-items-center">
+                    <li class="nav-item">
+                        <a href="index.html" class="btn btn-outline-secondary"><i class="fa-solid fa-house"></i> Volver al inicio
+                            del sitio</a>
+                    </li>
+                    <li class="nav-item btn">
+                        <button id="btnTheme" class="btn btn-outline-dark">🌙</button>
+                    </li>
+                </ul>
+           </div> 
         </div>
     </header>
 
-    <main>
+    <main class="main">
         <div class="text-center container my-5">
             <h2 class="fw-bold">Bienvenido a nuestra Gestión de Turnos</h2>
             <p class="text-muted">Seleccioná especialidad, obra social, profesional, fecha y horario.</p>
