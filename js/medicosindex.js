@@ -1,7 +1,6 @@
 import { inicializarDatos } from "./app.js";
 
-console.log("🌐 medicosindex.js cargado correctamente");
-
+console.log("🌐 medicosindex.js (Base64 compatible) cargado correctamente");
 inicializarDatos();
 
 export function mostrarMedicos() {
@@ -25,14 +24,15 @@ export function mostrarMedicos() {
         ? medico.obrasSociales.join(", ")
         : "Sin cobertura";
 
-    // Aseguramos que la foto tenga siempre la carpeta correcta
-    const rutaImagen = medico.foto
-      ? `img/${medico.foto}`
-      : "img/default.jpg";
+    // ✅ Detecta si la foto está en base64 o es ruta
+    const rutaImagen = medico.foto?.startsWith("data:image")
+      ? medico.foto
+      : `img/${medico.foto || "default.jpg"}`;
 
     card.innerHTML = `
       <div class="card h-100 shadow-sm">
-        <img data-src="${rutaImagen}"
+        <img 
+          ${medico.foto?.startsWith("data:image") ? `src="${rutaImagen}"` : `data-src="${rutaImagen}"`}
           alt="${medico.nombreApellido}"
           class="card-img-top rounded-top"
           style="
@@ -60,6 +60,7 @@ export function mostrarMedicos() {
 }
 
 document.addEventListener("DOMContentLoaded", mostrarMedicos);
+
 
 
 

@@ -1,6 +1,6 @@
 import { inicializarDatos } from "./app.js";
 
-console.log("🏥 obrasindex.js (versión con descripción) cargado correctamente");
+console.log("🏥 obrasindex.js (Base64 compatible) cargado correctamente");
 inicializarDatos();
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,13 +17,18 @@ document.addEventListener("DOMContentLoaded", () => {
   contenedor.innerHTML = "";
 
   obras.forEach((obra) => {
+    // ✅ Si la imagen es base64, se usa directamente
+    const rutaImagen = obra.imagen?.startsWith("data:image")
+      ? obra.imagen
+      : `img/${obra.imagen || "default.jpg"}`;
+
     const card = document.createElement("div");
     card.classList.add("col-md-3", "col-sm-6", "mb-4");
 
     card.innerHTML = `
       <div class="card h-100 shadow-sm border-0 text-center p-3">
         <img 
-          data-src="img/${obra.imagen || "default.jpg"}" 
+          ${obra.imagen?.startsWith("data:image") ? `src="${rutaImagen}"` : `data-src="${rutaImagen}"`} 
           alt="${obra.nombre}" 
           class="card-img-top mx-auto mb-3" 
           style="width: 120px; height: 120px; object-fit: contain;"
@@ -38,6 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
     contenedor.appendChild(card);
   });
 });
+
 
 
 

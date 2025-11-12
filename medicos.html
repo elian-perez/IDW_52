@@ -6,7 +6,9 @@
   <title>Administración - Staff Médico</title>
   <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+  <link rel="shortcut icon" href="#" />
+  <link rel="icon" data-src="img/icono-nav.png" type="image/x-icon">
+
 </head>
 
 <body class="bg-body-secondary min-vh-100 d-flex flex-column">
@@ -130,10 +132,16 @@
               <input type="number" id="valor" class="form-control" required>
             </div>
 
+            <!-- 📸 Foto del Médico -->
             <div class="mb-3">
-              <label class="form-label">Foto (nombre del archivo en /img)</label>
-              <input type="text" id="foto" class="form-control" placeholder="ej: medico1.jpg">
+              <label for="foto" class="form-label">Foto (nombre del archivo en /img o deja vacío para subir nueva)</label>
+              <input type="text" id="foto" class="form-control mb-2" placeholder="ej: medico1.jpg">
+              
+              <label for="fotoFile" class="form-label">O subir nueva imagen</label>
+              <input type="file" id="fotoFile" class="form-control" accept="image/*">
+              <img id="previewFoto" src="" alt="Vista previa" class="mt-3 rounded d-none" width="100">
             </div>
+
 
             <button type="submit" class="btn btn-primary w-100">Guardar</button>
           </form>

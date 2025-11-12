@@ -7,7 +7,9 @@
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="CSS/reservas.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+  <link rel="shortcut icon" href="#" />
+  <link rel="icon" data-src="img/icono-nav.png" type="image/x-icon">
+
 </head>
 
 <body class="bg-body-tertiary">
@@ -72,14 +74,18 @@
     </footer>
   </main>
 
+    <!-- Scripts -->
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="js/reservasadmin.js"></script>
+  <script src="js/base64-loader.js"></script>
+
+  <script>
+    // 🔒 Cerrar sesión
+    function logout() {
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("user");
+      window.location.href = "iniciosesion.html";
+    }
+  </script>
 </body>
-</html>
-
-        </main>
-        <script type="module" src="js/reservasadmin.js"></script>
-        <script src="js/base64-loader.js"></script>
-    </body>
-
 </html>

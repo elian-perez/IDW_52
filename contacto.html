@@ -7,7 +7,9 @@
   <title>Clínica Médica Marca Acme S.R.L.</title>
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+  <link rel="shortcut icon" href="#" />
+  <link rel="icon" data-src="img/icono-nav.png" type="image/x-icon">
+
 </head>
 
 <body class="bg-body bg-gradient">
@@ -129,6 +131,30 @@
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="js/tema.js"></script>
   <script src="js/base64-loader.js"></script>
+  <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const form = document.querySelector("form");
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault(); // Evita el envío real
+
+      const nombre = document.getElementById("nombre").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const mensaje = document.getElementById("mensaje").value.trim();
+
+      if (!nombre || !email || !mensaje) {
+        alert("⚠️ Por favor, completá todos los campos.");
+        return;
+      }
+
+      // Simulación de envío
+      setTimeout(() => {
+        alert(`✅ Gracias ${nombre}, tu mensaje fue enviado correctamente.\nTe responderemos a ${email} en breve.`);
+        form.reset(); // Limpia el formulario
+      }, 800);
+    });
+  });
+</script>
 </body>
 
 </html>

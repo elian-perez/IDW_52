@@ -6,21 +6,9 @@
   <title>Administración - Obras Sociales</title>
   <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+  <link rel="shortcut icon" href="#" />
+  <link rel="icon" data-src="img/icono-nav.png" type="image/x-icon">
 
-  <style>
-    .modal-content {
-      border-radius: 1rem;
-    }
-    .modal-header {
-      background-color: #0d6efd;
-      color: #fff;
-      border-bottom: none;
-    }
-    .modal-footer {
-      border-top: none;
-    }
-  </style>
 </head>
 
 <body class="bg-body-secondary min-vh-100 d-flex flex-column">
@@ -96,59 +84,48 @@
       </table>
     </div>
 
-    <!-- 💬 Modal Obra Social -->
-    <div class="modal fade" id="modalObra" tabindex="-1" aria-labelledby="modalObraLabel" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content border-0 shadow-lg">
+    <!-- 💬 Modal Agregar / Editar Obra Social -->
+    <div class="modal fade" id="modalObra" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title fw-bold" id="modalObraLabel">Agregar / Editar Obra Social</h5>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+            <h5 class="modal-title">Agregar / Editar Obra Social</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
 
-          <form id="formObra" class="needs-validation" novalidate>
-            <div class="modal-body">
+          <div class="modal-body">
+            <form id="formObra">
               <input type="hidden" id="idObra">
 
               <div class="mb-3">
-                <label for="nombreObra" class="form-label fw-semibold">Nombre</label>
+                <label class="form-label fw-semibold">Nombre</label>
                 <input type="text" id="nombreObra" class="form-control" placeholder="Ej: OSDE, Galeno..." required>
-                <div class="invalid-feedback">El nombre es obligatorio.</div>
               </div>
 
               <div class="mb-3">
-                <label for="descripcionObra" class="form-label fw-semibold">Descripción</label>
-                <textarea 
-                  id="descripcionObra" 
-                  class="form-control" 
-                  rows="3" 
-                  placeholder="Ej: Cobertura médica integral a nivel nacional."
-                  required
-                ></textarea>
-                <div class="invalid-feedback">La descripción es obligatoria.</div>
+                <label class="form-label fw-semibold">Descripción</label>
+                <textarea id="descripcionObra" class="form-control" rows="2" placeholder="Cobertura médica integral a nivel nacional" required></textarea>
               </div>
 
+              <!-- 📸 Imagen -->
               <div class="mb-3">
-                <label for="imagenObra" class="form-label fw-semibold">Imagen (ruta o nombre de archivo)</label>
-                <input type="text" id="imagenObra" class="form-control" placeholder="Ej: logos_os/osde.jpg">
-                <div class="form-text">
-                  Guardá las imágenes en <code>img/logos_os/</code>.  
-                  Si dejás vacío, se usará <strong>default.jpg</strong>.
-                </div>
-              </div>
-            </div>
+                <label for="imagenObra" class="form-label fw-semibold">
+                  Imagen (nombre del archivo en /img o deja vacío para subir nueva)
+                </label>
+                <input type="text" id="imagenObra" class="form-control mb-2" placeholder="Ej: logos_os/osde.jpg">
 
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                <i class="fa-solid fa-xmark"></i> Cancelar
-              </button>
-              <button type="submit" class="btn btn-success">
-                <i class="fa-solid fa-floppy-disk"></i> Guardar
-              </button>
-            </div>
-          </form>
+                <label for="imagenFile" class="form-label fw-semibold">O subir nueva imagen</label>
+                <input type="file" id="imagenFile" class="form-control" accept="image/*">
+                <img id="previewImagen" src="" alt="Vista previa" class="mt-3 rounded d-none" width="100">
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100">Guardar</button>
+            </form>
+          </div>
         </div>
       </div>
     </div>
+
   </main>
 
   <footer class="bg-body text-body text-center py-3 border-top mt-5">
@@ -168,6 +145,7 @@
     }
   </script>
   <script src="js/base64-loader.js"></script>
+
 </body>
 </html>
 

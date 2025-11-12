@@ -1,7 +1,7 @@
 import { inicializarDatos } from "./app.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🩺 medicos.js cargado correctamente");
+  console.log("🩺 medicos.js (Base64 compatible) cargado correctamente");
   inicializarDatos();
 
   const tablaMedicos = document.getElementById("tablaMedicos");
@@ -11,8 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const idMedico = document.getElementById("idMedico");
   const selectEspecialidad = document.getElementById("especialidad");
   const obrasContainer = document.getElementById("obrasSocialesContainer");
+  const fotoInput = document.getElementById("fotoFile");
+  const preview = document.getElementById("previewFoto");
 
-  
+  // 🔹 Función auxiliar: convierte archivo → Base64
+  function fileToBase64(inputFile) {
+    return new Promise((resolve) => {
+      const file = inputFile.files[0];
+      if (!file) return resolve(null);
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Cargar datos iniciales
   function obtenerDatos() {
     return {
       medicos: JSON.parse(localStorage.getItem("medicos")) || [],
@@ -23,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let { medicos } = obtenerDatos();
 
-  
+  // ---------- Cargar especialidades y obras ----------
   const cargarOpciones = () => {
     const { especialidades, obras } = obtenerDatos();
 
@@ -43,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cargarOpciones();
 
-  
+  // ---------- Renderizar médicos ----------
   const mostrarMedicos = () => {
     medicos = JSON.parse(localStorage.getItem("medicos")) || [];
     tablaMedicos.innerHTML = "";
@@ -58,7 +72,12 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${m.matricula}</td>
         <td>${m.descripcion}</td>
         <td>$${m.valor}</td>
-        <td><img data-src="img/${m.foto}" width="60" class="rounded"><div class="small text-muted">${m.foto}</div></td>
+        <td>
+          <img data-src="${m.foto?.startsWith('data:image') ? '' : 'img/'}${m.foto}" 
+              src="${m.foto?.startsWith('data:image') ? m.foto : ''}" 
+              width="60" class="rounded">
+          <div class="small text-muted">${m.foto?.startsWith('data:image') ? 'Base64' : m.foto}</div>
+        </td>
         <td>
           <button class="btn btn-warning btn-sm btnEditar" data-index="${i}">Editar</button>
           <button class="btn btn-danger btn-sm btnEliminar" data-index="${i}">Eliminar</button>
@@ -66,25 +85,47 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tablaMedicos.appendChild(fila);
     });
+
+    // 🔁 Refresca las imágenes base64 después de renderizar
+    if (window.reemplazarImagenes) window.reemplazarImagenes();
   };
 
+  // Inicializa la primera renderización
   mostrarMedicos();
 
- 
+
+  // ---------- Nuevo médico ----------
   btnNuevo.addEventListener("click", () => {
     formMedico.reset();
+    preview.src = "";
+    preview.classList.add("d-none");
     idMedico.value = "";
     cargarOpciones();
     modal.show();
   });
 
-  
-  formMedico.addEventListener("submit", e => {
-    e.preventDefault();
+  // Vista previa al seleccionar archivo
+  fotoInput.addEventListener("change", async () => {
+    const base64 = await fileToBase64(fotoInput);
+    if (base64) {
+      preview.src = base64;
+      preview.classList.remove("d-none");
+    }
+  });
 
+  // ---------- Guardar médico ----------
+  formMedico.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    
     const obrasSeleccionadas = Array.from(
       obrasContainer.querySelectorAll("input[type='checkbox']:checked")
     ).map(cb => cb.value);
+
+    let fotoFinal = document.getElementById("foto").value.trim() || "default.jpg";
+    const nuevaBase64 = await fileToBase64(fotoInput);
+
+    // Si el usuario subió una imagen nueva, se usa la base64
+    if (nuevaBase64) fotoFinal = nuevaBase64;
 
     const nuevoMedico = {
       id: idMedico.value
@@ -96,7 +137,7 @@ document.addEventListener("DOMContentLoaded", () => {
       matricula: document.getElementById("matricula").value.trim(),
       descripcion: document.getElementById("descripcion").value.trim(),
       valor: document.getElementById("valor").value.trim(),
-      foto: document.getElementById("foto").value.trim() || "default.jpg"
+      foto: fotoFinal
     };
 
     if (idMedico.value) {
@@ -110,12 +151,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     localStorage.setItem("medicos", JSON.stringify(medicos));
     mostrarMedicos();
+    window.reemplazarImagenes(); // 🔁 actualiza las fotos en tiempo real
     modal.hide();
+
   });
 
-  
-  tablaMedicos.addEventListener("click", e => {
+  // ---------- Editar / Eliminar ----------
+  tablaMedicos.addEventListener("click", (e) => {
     const i = e.target.dataset.index;
+    
     if (e.target.classList.contains("btnEditar")) {
       const m = medicos[i];
       idMedico.value = m.id;
@@ -127,7 +171,16 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("matricula").value = m.matricula;
       document.getElementById("descripcion").value = m.descripcion;
       document.getElementById("valor").value = m.valor;
-      document.getElementById("foto").value = m.foto;
+      document.getElementById("foto").value = m.foto?.startsWith("data:image") ? "" : m.foto;
+
+      // Mostrar vista previa
+      if (m.foto?.startsWith("data:image")) {
+        preview.src = m.foto;
+        preview.classList.remove("d-none");
+      } else {
+        preview.classList.add("d-none");
+      }
+
       modal.show();
     }
 
@@ -140,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  
+  // ---------- Sincronización entre pestañas ----------
   window.addEventListener("storage", event => {
     if (["especialidades", "obras"].includes(event.key)) {
       cargarOpciones();
@@ -148,5 +201,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 });
+
 
 
