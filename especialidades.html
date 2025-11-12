@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administración - Especialidades Médicas</title>
   <link href="bootstrap-5.3.8-dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
 </head>
 
@@ -13,28 +14,45 @@
   <!-- 🔒 Verificación de sesión -->
   <script src="js/verificarSesion.js"></script>
 
-  <!-- ✅ HEADER RESPONSIVE -->
-  <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
+  <!-- HEADER RESPONSIVE -->
+  <header class="navbar navbar-expand-lg bg-body-tertiary text-body shadow-sm sticky-top">
     <div class="container">
-      <!-- Logo -->
-      <a class="navbar-brand d-flex align-items-center" href="index.html">
+      <a class="navbar-brand d-flex align-items-center" href="paneladmin.html">
         <img data-src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
       </a>
 
       <!-- Botón hamburguesa -->
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarEspecialidades"
-        aria-controls="navbarEspecialidades" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarAdmin"
+        aria-controls="navbarAdmin" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Contenido del header -->
-      <div class="collapse navbar-collapse" id="navbarEspecialidades">
-        <ul class="navbar-nav ms-auto align-items-lg-center">
+      <div class="collapse navbar-collapse justify-content-end" id="navbarAdmin">
+        <ul class="navbar-nav align-items-center">
           <li class="nav-item">
-            <h4 class="text-center fw-bold mb-0 px-3">Panel de Administración - Especialidades</h4>
+            <a class="nav-link fw-bold" href="paneladmin.html">
+              <i class="fa-solid fa-house"></i> Panel Principal
+            </a>
           </li>
-          <li class="nav-item mt-3 mt-lg-0">
-            <button onclick="logout()" class="btn btn-outline-danger ms-lg-3 w-100">Cerrar sesión</button>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="medicos.html">
+              <i class="fa-solid fa-user-doctor"></i> Médicos
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold active" href="especialidades.html">
+              <i class="fa-solid fa-stethoscope"></i> Especialidades
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link fw-bold" href="obras.html">
+              <i class="fa-solid fa-file-medical"></i> Obras Sociales
+            </a>
+          </li>
+          <li class="nav-item">
+            <button onclick="logout()" class="btn btn-outline-danger ms-lg-3 mt-2 mt-lg-0">
+              <i class="fa-solid fa-right-from-bracket"></i> Cerrar sesión
+            </button>
           </li>
         </ul>
       </div>
@@ -45,7 +63,6 @@
     <h3 class="text-center mb-4 fw-bold">Gestión de Especialidades Médicas</h3>
 
     <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
-      <a href="paneladmin.html" class="btn btn-outline-primary mb-2">Volver al Panel</a>
       <button id="btnNueva" class="btn btn-success mb-2">+ Nueva Especialidad</button>
     </div>
 
