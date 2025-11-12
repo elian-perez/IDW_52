@@ -32,7 +32,7 @@ export function mostrarMedicos() {
 
     card.innerHTML = `
       <div class="card h-100 shadow-sm">
-        <img src="${rutaImagen}"
+        <img data-src="${rutaImagen}"
           alt="${medico.nombreApellido}"
           class="card-img-top rounded-top"
           style="

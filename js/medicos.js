@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${m.matricula}</td>
         <td>${m.descripcion}</td>
         <td>$${m.valor}</td>
-        <td><img src="img/${m.foto}" width="60" class="rounded"><div class="small text-muted">${m.foto}</div></td>
+        <td><img data-src="img/${m.foto}" width="60" class="rounded"><div class="small text-muted">${m.foto}</div></td>
         <td>
           <button class="btn btn-warning btn-sm btnEditar" data-index="${i}">Editar</button>
           <button class="btn btn-danger btn-sm btnEliminar" data-index="${i}">Eliminar</button>

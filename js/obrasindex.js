@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     card.innerHTML = `
       <div class="card h-100 shadow-sm border-0 text-center p-3">
         <img 
-          src="img/${obra.imagen || "default.jpg"}" 
+          data-src="img/${obra.imagen || "default.jpg"}" 
           alt="${obra.nombre}" 
           class="card-img-top mx-auto mb-3" 
           style="width: 120px; height: 120px; object-fit: contain;"

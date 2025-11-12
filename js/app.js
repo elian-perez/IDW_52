@@ -128,4 +128,26 @@ export const inicializarDatos = () => {
     console.log("✅ Obras sociales iniciales cargadas (con descripción).");
   }
 
+  // ---------- TURNOS POR DEFECTO ----------
+  if (!localStorage.getItem("turnos")) {
+    const turnosIniciales = [
+    // --- Dr. Jesús María Amor ---
+    { id: 1, medicoId: 1, dia: "2025-11-11", hora: "09:00", disponible: true },
+    { id: 2, medicoId: 1, dia: "2025-11-11", hora: "10:00", disponible: true },
+    { id: 3, medicoId: 1, dia: "2025-11-12", hora: "09:00", disponible: true },
+    { id: 4, medicoId: 1, dia: "2025-11-12", hora: "11:00", disponible: true },
+
+    // --- Dr. Mario Miguel Trozado ---
+    { id: 5, medicoId: 2, dia: "2025-11-11", hora: "08:30", disponible: true },
+    { id: 6, medicoId: 2, dia: "2025-11-13", hora: "09:00", disponible: true },
+    { id: 7, medicoId: 2, dia: "2025-11-13", hora: "10:30", disponible: true },
+
+    // --- Dr. Atilio Simón Garabato ---
+    { id: 8, medicoId: 3, dia: "2025-11-14", hora: "14:00", disponible: true },
+    { id: 9, medicoId: 3, dia: "2025-11-14", hora: "15:00", disponible: true },
+    { id: 10, medicoId: 3, dia: "2025-11-14", hora: "15:30", disponible: true },
+    ];
+    localStorage.setItem("turnos", JSON.stringify(turnosIniciales));
+    console.log("✅ Turnos iniciales cargados.");
+  }
 };

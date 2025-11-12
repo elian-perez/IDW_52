@@ -94,6 +94,7 @@ function configurarEventos() {
   // Cuando elige profesional
   selProfesional.addEventListener("change", () => {
     mostrarProfesionalCard();
+    activarImagenesBase64();
     cargarDias();
     actualizarResumen();
   });
@@ -152,6 +153,15 @@ function cargarProfesionales() {
   });
 }
 
+function formatearFechaBonita(fechaISO) {
+  const [year, month, day] = fechaISO.split("-");
+  const fecha = new Date(year, month - 1, day);
+
+  const opciones = { weekday: "long", day: "2-digit", month: "2-digit" };
+  const texto = fecha.toLocaleDateString("es-AR", opciones).replace(",", "");
+  return texto.charAt(0).toUpperCase() + texto.slice(1);
+}
+
 function limpiarProfesionales() {
   selProfesional.innerHTML = '<option value="">Seleccionar…</option>';
   selProfesional.disabled = true;
@@ -171,21 +181,37 @@ function mostrarProfesionalCard() {
         <div class="card mb-3">
           <div class="card-body d-flex align-items-center gap-3">
 
-            <img src="img/${medico.foto || "https://via.placeholder.com/80"}" 
+            <img data-src="img/${medico.foto || "https://via.placeholder.com/80"}" 
                  class="rounded-circle" 
                  width="80" height="80" />
 
             <div>
                 <h5 class="card-title mb-1">${medico.nombreApellido}</h5>
                 <p class="text-muted mb-1">${medico.especialidad}</p>
-                <small class="text-muted">${
-                  medico.direccion || "Dirección no cargada"
-                }</small>
             </div>
 
           </div>
         </div>
     `;
+}
+
+function activarImagenesBase64() {
+  fetch("js/imagenes_base64.json")
+    .then(res => res.json())
+    .then(data => {
+      document.querySelectorAll("img[data-src]").forEach(img => {
+        let ruta = img.getAttribute("data-src")
+          .replace(/^\.?\/*/, "")
+          .replace(/^img\//, "");
+
+        if (data[ruta]) {
+          img.src = data[ruta]; // Base64 desde JSON
+        } else {
+          img.src = img.getAttribute("data-src"); // Fallback si no existe
+        }
+      });
+    })
+    .catch(err => console.error("Error cargando imágenes Base64:", err));
 }
 
 function cargarDias() {
@@ -201,16 +227,19 @@ function cargarDias() {
   // obtener los días disponibles sin repetir
   const dias = [...new Set(turnosMedico.map((t) => t.dia))];
 
+  // ordenar las fechas ISO ascendentemente antes de crear los botones
+  dias.sort((a, b) => new Date(a) - new Date(b));
+
   dias.forEach((dia) => {
-    const btn = document.createElement("button");
-    btn.className = "btn btn-outline-primary btn-sm m-1";
-    btn.textContent = capitalizar(dia);
-    btn.dataset.dia = dia;
+  const btn = document.createElement("button");
+  btn.className = "btn btn-outline-primary btn-sm m-1";
+  btn.textContent = formatearFechaBonita(dia);
+  btn.dataset.dia = dia;
 
-    btn.addEventListener("click", () => seleccionarDia(btn));
+  btn.addEventListener("click", () => seleccionarDia(btn));
+  diasSemanaDiv.appendChild(btn);
+});
 
-    diasSemanaDiv.appendChild(btn);
-  });
 
   if (dias.length === 0) {
     diasSemanaDiv.innerHTML =
@@ -335,8 +364,9 @@ function confirmarReserva() {
     return;
   }
 
-  // ID único
-  const idReserva = Date.now();
+  let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
+  // ID Secuencial
+  const idReserva = reservas.length > 0 ? reservas[reservas.length - 1].id + 1 : 1;
 
   const espSeleccionada = especialidades.find(
     (e) => e.id == especialidadId
@@ -365,7 +395,6 @@ function confirmarReserva() {
   };
 
   // Guardar reserva
-  let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
   reservas.push(reserva);
   localStorage.setItem("reservas", JSON.stringify(reservas));
 

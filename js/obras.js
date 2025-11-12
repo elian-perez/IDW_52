@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <td>${obra.nombre}</td>
         <td>${obra.descripcion || "-"}</td>
         <td>
-          <img src="img/${obra.imagen || "default.jpg"}" width="80" class="rounded mb-1">
+          <img data-src="img/${obra.imagen || "default.jpg"}" width="80" class="rounded mb-1">
           <div class="small text-muted">${obra.imagen || ""}</div>
         </td>
         <td>
