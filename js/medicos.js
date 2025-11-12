@@ -76,7 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
           <img data-src="${m.foto?.startsWith('data:image') ? '' : 'img/'}${m.foto}" 
               src="${m.foto?.startsWith('data:image') ? m.foto : ''}" 
               width="60" class="rounded">
-          <div class="small text-muted">${m.foto?.startsWith('data:image') ? 'Base64' : m.foto}</div>
         </td>
         <td>
           <button class="btn btn-warning btn-sm btnEditar" data-index="${i}">Editar</button>
