@@ -136,21 +136,20 @@
     const form = document.querySelector("form");
 
     form.addEventListener("submit", (e) => {
-      e.preventDefault(); // Evita el envío real
+      e.preventDefault();
 
       const nombre = document.getElementById("nombre").value.trim();
       const email = document.getElementById("email").value.trim();
       const mensaje = document.getElementById("mensaje").value.trim();
 
       if (!nombre || !email || !mensaje) {
-        alert("⚠️ Por favor, completá todos los campos.");
+        alert("Por favor, completá todos los campos.");
         return;
       }
 
-      // Simulación de envío
       setTimeout(() => {
-        alert(`✅ Gracias ${nombre}, tu mensaje fue enviado correctamente.\nTe responderemos a ${email} en breve.`);
-        form.reset(); // Limpia el formulario
+        alert(`Gracias ${nombre}, tu mensaje fue enviado correctamente.\nTe responderemos a ${email} en breve.`);
+        form.reset();
       }, 800);
     });
   });

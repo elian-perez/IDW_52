@@ -1,7 +1,7 @@
 import { inicializarDatos } from "./app.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🩺 medicos.js (Base64 compatible) cargado correctamente");
+  console.log("medicos.js (Base64 compatible) cargado correctamente");
   inicializarDatos();
 
   const tablaMedicos = document.getElementById("tablaMedicos");
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const fotoInput = document.getElementById("fotoFile");
   const preview = document.getElementById("previewFoto");
 
-  // 🔹 Función auxiliar: convierte archivo → Base64
+  // Función para convierte archivo a Base64
   function fileToBase64(inputFile) {
     return new Promise((resolve) => {
       const file = inputFile.files[0];
@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Cargar datos iniciales
+
   function obtenerDatos() {
     return {
       medicos: JSON.parse(localStorage.getItem("medicos")) || [],
@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let { medicos } = obtenerDatos();
 
-  // ---------- Cargar especialidades y obras ----------
+  // Carga de Especialidades y Obras Sociales
   const cargarOpciones = () => {
     const { especialidades, obras } = obtenerDatos();
 
@@ -57,7 +57,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   cargarOpciones();
 
-  // ---------- Renderizar médicos ----------
+  // Muestra de médicos
   const mostrarMedicos = () => {
     medicos = JSON.parse(localStorage.getItem("medicos")) || [];
     tablaMedicos.innerHTML = "";
@@ -85,15 +85,15 @@ document.addEventListener("DOMContentLoaded", () => {
       tablaMedicos.appendChild(fila);
     });
 
-    // 🔁 Refresca las imágenes base64 después de renderizar
+
     if (window.reemplazarImagenes) window.reemplazarImagenes();
   };
 
-  // Inicializa la primera renderización
+  // Primer Muestreo
   mostrarMedicos();
 
 
-  // ---------- Nuevo médico ----------
+  // Alta médico
   btnNuevo.addEventListener("click", () => {
     formMedico.reset();
     preview.src = "";
@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.show();
   });
 
-  // Vista previa al seleccionar archivo
+  
   fotoInput.addEventListener("change", async () => {
     const base64 = await fileToBase64(fotoInput);
     if (base64) {
@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ---------- Guardar médico ----------
+  // Confirmar médico
   formMedico.addEventListener("submit", async (e) => {
     e.preventDefault();
     
@@ -123,7 +123,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let fotoFinal = document.getElementById("foto").value.trim() || "default.jpg";
     const nuevaBase64 = await fileToBase64(fotoInput);
 
-    // Si el usuario subió una imagen nueva, se usa la base64
+    
     if (nuevaBase64) fotoFinal = nuevaBase64;
 
     const nuevoMedico = {
@@ -142,20 +142,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (idMedico.value) {
       const i = medicos.findIndex(m => m.id === parseInt(idMedico.value));
       medicos[i] = nuevoMedico;
-      console.log(`✏️ Médico actualizado: ${nuevoMedico.nombreApellido}`);
+      console.log(`Médico actualizado: ${nuevoMedico.nombreApellido}`);
     } else {
       medicos.push(nuevoMedico);
-      console.log(`🩺 Médico agregado: ${nuevoMedico.nombreApellido}`);
+      console.log(`Médico agregado: ${nuevoMedico.nombreApellido}`);
     }
 
     localStorage.setItem("medicos", JSON.stringify(medicos));
     mostrarMedicos();
-    window.reemplazarImagenes(); // 🔁 actualiza las fotos en tiempo real
+    window.reemplazarImagenes();
     modal.hide();
 
   });
 
-  // ---------- Editar / Eliminar ----------
+  // Editar & Borrar
   tablaMedicos.addEventListener("click", (e) => {
     const i = e.target.dataset.index;
     
@@ -172,7 +172,7 @@ document.addEventListener("DOMContentLoaded", () => {
       document.getElementById("valor").value = m.valor;
       document.getElementById("foto").value = m.foto?.startsWith("data:image") ? "" : m.foto;
 
-      // Mostrar vista previa
+      
       if (m.foto?.startsWith("data:image")) {
         preview.src = m.foto;
         preview.classList.remove("d-none");
@@ -192,7 +192,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ---------- Sincronización entre pestañas ----------
+  // Actualización de pestañas
   window.addEventListener("storage", event => {
     if (["especialidades", "obras"].includes(event.key)) {
       cargarOpciones();

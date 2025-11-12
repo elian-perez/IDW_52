@@ -1,17 +1,17 @@
 import { inicializarDatos } from "./app.js";
 
-console.log("🌐 medicosindex.js (Base64 compatible) cargado correctamente");
+console.log("medicosindex.js (Base64 compatible) cargado correctamente");
 inicializarDatos();
 
 export function mostrarMedicos() {
   const contenedor = document.getElementById("contenedorMedicos");
   if (!contenedor) {
-    console.warn("⚠️ No se encontró el contenedor de médicos en esta página.");
+    console.warn("No se encontró el contenedor de médicos en esta página.");
     return;
   }
 
   const medicos = JSON.parse(localStorage.getItem("medicos")) || [];
-  console.log(`🩺 Renderizando ${medicos.length} médicos en index.html`);
+  console.log(`Renderizando ${medicos.length} médicos en index.html`);
 
   contenedor.innerHTML = "";
 
@@ -24,7 +24,7 @@ export function mostrarMedicos() {
         ? medico.obrasSociales.join(", ")
         : "Sin cobertura";
 
-    // ✅ Detecta si la foto está en base64 o es ruta
+
     const rutaImagen = medico.foto?.startsWith("data:image")
       ? medico.foto
       : `img/${medico.foto || "default.jpg"}`;

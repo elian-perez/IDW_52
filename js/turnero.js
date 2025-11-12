@@ -8,9 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   cargarTurnosAdmin();
 });
 
-// -------------------------------
-// 1. SELECTORES DEL HTML
-// -------------------------------
+// Opciones de HTML
 const selEspecialidad = document.getElementById("selEspecialidad");
 const selObraSocial = document.getElementById("selObraSocial");
 const selProfesional = document.getElementById("selProfesional");
@@ -31,17 +29,13 @@ const resValor = document.getElementById("resValor");
 const btnConfirmar = document.getElementById("btnConfirmar");
 const mensaje = document.getElementById("mensaje");
 
-// -------------------------------
-// 2. VARIABLES (se llenan con app.js)
-// -------------------------------
+// Variables se traen de app.js
 let especialidades = [];
 let obrasSociales = [];
 let medicos = [];
 let turnos = [];
 
-// -------------------------------
-// 4. CARGA DE DATOS
-// -------------------------------
+// Inicio de datos
 function cargarDatosDesdeAppJS() {
   especialidades = JSON.parse(localStorage.getItem("especialidades")) || [];
   obrasSociales = JSON.parse(localStorage.getItem("obras")) || [];
@@ -53,14 +47,12 @@ function cargarDatosDesdeAppJS() {
   console.table(medicos);
 }
 
-// Cargar Turnos // Solo para admin
+
 function cargarTurnosAdmin() {
   turnos = JSON.parse(localStorage.getItem("turnos")) || [];
 }
 
-// -------------------------------
-// 5. CARGAR ESPECIALIDADES
-// -------------------------------
+// Muestra Especialiades
 function cargarEspecialidades() {
   selEspecialidad.innerHTML = '<option value="">Seleccionar…</option>';
 
@@ -72,11 +64,9 @@ function cargarEspecialidades() {
   });
 }
 
-// -------------------------------
-// 6. CONFIGURAR EVENTOS
-// -------------------------------
+// Eventos
 function configurarEventos() {
-  // Cuando el usuario elige especialidad
+  // Se elige Especialidad
   selEspecialidad.addEventListener("change", () => {
     selObraSocial.disabled = false;
     cargarObrasSociales();
@@ -84,14 +74,14 @@ function configurarEventos() {
     actualizarResumen();
   });
 
-  // Cuando elige obra social
+  // Se elige Obra Social
   selObraSocial.addEventListener("change", () => {
     selProfesional.disabled = false;
     cargarProfesionales();
     actualizarResumen();
   });
 
-  // Cuando elige profesional
+  // Se elige Profesional
   selProfesional.addEventListener("change", () => {
     mostrarProfesionalCard();
     activarImagenesBase64();
@@ -99,13 +89,11 @@ function configurarEventos() {
     actualizarResumen();
   });
 
-  // Confirmar turno
+  // Turno OK
   btnConfirmar.addEventListener("click", confirmarReserva);
 }
 
-// -------------------------------
-// 7. COMPLETAREMOS ESTAS FUNCIONES DESPUÉS
-// -------------------------------
+// Funciones extras
 function cargarObrasSociales() {
   selObraSocial.innerHTML = '<option value="">Seleccionar…</option>';
 
@@ -132,11 +120,11 @@ function cargarProfesionales() {
 
   if (!espSeleccionada) return;
 
-  // ✅ Buscar el nombre de la obra social según el ID seleccionado
+
   const obraSeleccionada = obrasSociales.find((o) => o.id == obraSelId);
   const nombreObra = obraSeleccionada ? obraSeleccionada.nombre : "";
 
-  // ✅ Filtrar por especialidad + nombre de obra social
+
   const filtrados = medicos.filter((m) => {
     const coincideEspecialidad = m.especialidad === espSeleccionada.nombre;
     const coincideObra =
@@ -184,7 +172,6 @@ function mostrarProfesionalCard() {
             <img data-src="img/${medico.foto || "https://via.placeholder.com/80"}" 
                  class="rounded-circle" 
                  width="80" height="80" />
-
             <div>
                 <h5 class="card-title mb-1">${medico.nombreApellido}</h5>
                 <p class="text-muted mb-1">${medico.especialidad}</p>
@@ -205,9 +192,9 @@ function activarImagenesBase64() {
           .replace(/^img\//, "");
 
         if (data[ruta]) {
-          img.src = data[ruta]; // Base64 desde JSON
+          img.src = data[ruta];
         } else {
-          img.src = img.getAttribute("data-src"); // Fallback si no existe
+          img.src = img.getAttribute("data-src");
         }
       });
     })
@@ -221,13 +208,13 @@ function cargarDias() {
   const medicoId = parseInt(selProfesional.value);
   if (!medicoId) return;
 
-  // filtrar turnos reales del medico
+
   const turnosMedico = turnos.filter((t) => t.medicoId === medicoId);
 
-  // obtener los días disponibles sin repetir
+
   const dias = [...new Set(turnosMedico.map((t) => t.dia))];
 
-  // ordenar las fechas ISO ascendentemente antes de crear los botones
+  // Ordena las fechas 
   dias.sort((a, b) => new Date(a) - new Date(b));
 
   dias.forEach((dia) => {
@@ -394,16 +381,16 @@ function confirmarReserva() {
     medicoId: medicoId,
   };
 
-  // Guardar reserva
+  // Cargar reserva
   reservas.push(reserva);
   localStorage.setItem("reservas", JSON.stringify(reservas));
 
   marcarTurnoComoOcupado(medicoId, fechaHora);
   mostrarMensajeExito();
-  
+  // Popup de confirmación para actualizar la página y resetear todos los valores
   const resumen = `
   <div style="font-family: sans-serif; text-align: left; padding: 10px;">
-    <h5 style="margin-bottom: 10px;">Reserva confirmada ✅</h5>
+    <h5 style="margin-bottom: 10px;">Reserva confirmada - :D</h5>
     <p><strong>Paciente:</strong> ${nombre}</p>
     <p><strong>Médico:</strong> ${medico.nombreApellido}</p>
     <p><strong>Especialidad:</strong> ${espSeleccionada.nombre}</p>
@@ -422,8 +409,8 @@ function confirmarReserva() {
   ventana.document.title = "Reserva confirmada";
 
   setTimeout(() => {
-    ventana.close(); // cerrar ventana emergente
-    window.location.reload(); // recargar la página principal
+    ventana.close(); 
+    window.location.reload();
   }, 7000);
 
   btnConfirmar.disabled = true;
@@ -462,7 +449,7 @@ function marcarTurnoComoOcupado(medicoId, fechaHora) {
 function mostrarMensajeExito() {
   mensaje.classList.remove("text-danger");
   mensaje.classList.add("text-success");
-  mensaje.textContent = "✅ Turno reservado con éxito.";
+  mensaje.textContent = "Turno reservado con éxito.";
 
   setTimeout(() => {
     mensaje.textContent = "";

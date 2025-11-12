@@ -1,23 +1,22 @@
 import { inicializarDatos } from "./app.js";
 
-console.log("🏥 obrasindex.js (Base64 compatible) cargado correctamente");
+console.log("obrasindex.js (Base64 compatible) cargado correctamente");
 inicializarDatos();
 
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("contenedorObras");
 
   if (!contenedor) {
-    console.warn("⚠️ No se encontró el contenedor de obras en esta página.");
+    console.warn("No se encontró el contenedor de obras en esta página.");
     return;
   }
 
   const obras = JSON.parse(localStorage.getItem("obras")) || [];
-  console.log(`💾 Renderizando ${obras.length} obras sociales desde localStorage`);
+  console.log(`Renderizando ${obras.length} obras sociales desde localStorage`);
 
   contenedor.innerHTML = "";
 
   obras.forEach((obra) => {
-    // ✅ Si la imagen es base64, se usa directamente
     const rutaImagen = obra.imagen?.startsWith("data:image")
       ? obra.imagen
       : `img/${obra.imagen || "default.jpg"}`;

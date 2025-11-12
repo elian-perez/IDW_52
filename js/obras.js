@@ -1,7 +1,7 @@
 import { inicializarDatos } from "./app.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("🏥 obras.js (Base64 compatible) cargado correctamente");
+  console.log("obras.js (Base64 compatible) cargado correctamente");
   inicializarDatos();
 
   const tablaObras = document.getElementById("tablaObras");
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let obras = JSON.parse(localStorage.getItem("obras")) || [];
 
-  // 🔹 Convierte un archivo en base64
+  // Función para convierte archivo a Base64
   function fileToBase64(inputFile) {
     return new Promise((resolve) => {
       const file = inputFile.files[0];
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ---------- Renderizar obras ----------
+  // Muestra obras sociales
   const mostrarObras = () => {
     obras = JSON.parse(localStorage.getItem("obras")) || [];
     tablaObras.innerHTML = "";
@@ -53,9 +53,9 @@ document.addEventListener("DOMContentLoaded", () => {
       tablaObras.appendChild(fila);
     });
 
-    // 🔁 Refresca las imágenes base64 después de renderizar
+    
     if (window.reemplazarImagenes) window.reemplazarImagenes();
-    // 🔔 Fuerza actualización solo en otras pestañas (sin recursión local)
+  
     if (!sessionStorage.getItem("obrasSync")) {
       sessionStorage.setItem("obrasSync", "1");
       window.dispatchEvent(new StorageEvent("storage", { key: "obras" }));
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   mostrarObras();
 
-  // ---------- Nueva obra ----------
+  // Nueva obra 
   btnNueva.addEventListener("click", () => {
     formObra.reset();
     preview.src = "";
@@ -74,7 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.show();
   });
 
-  // Vista previa al seleccionar archivo
+ 
   imagenFile.addEventListener("change", async () => {
     const base64 = await fileToBase64(imagenFile);
     if (base64) {
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ---------- Guardar obra ----------
+  // ALTA obra social
   formObra.addEventListener("submit", async (e) => {
     e.preventDefault();
 
@@ -107,9 +107,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const i = obras.findIndex(o => o.id === parseInt(idObra.value));
     const nombreAnterior = obras[i].nombre;
     obras[i] = nuevaObra;
-    console.log(`✏️ Obra actualizada: ${nuevaObra.nombre}`);
+    console.log(`Obra actualizada: ${nuevaObra.nombre}`);
 
-    // 🔁 Actualizar nombre en los médicos que tenían la obra anterior
+    
     let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
     medicos = medicos.map(m => {
       if (m.obrasSociales?.includes(nombreAnterior)) {
@@ -120,19 +120,19 @@ document.addEventListener("DOMContentLoaded", () => {
       return m;
     });
     localStorage.setItem("medicos", JSON.stringify(medicos));
-    console.log(`👨‍⚕️ Médicos actualizados con el nuevo nombre de obra social`);
+    console.log(`Médicos actualizados con el nuevo nombre de obra social`);
   } else {
     obras.push(nuevaObra);
-    console.log(`🩺 Obra agregada: ${nuevaObra.nombre}`);
+    console.log(`Obra agregada: ${nuevaObra.nombre}`);
   }
 
     localStorage.setItem("obras", JSON.stringify(obras));
     mostrarObras();
-    window.reemplazarImagenes(); // 🔁 actualiza imágenes al instante
+    window.reemplazarImagenes(); 
     modal.hide();
   });
 
-  // ---------- Editar / Eliminar ----------
+  // Editar & Eliminar 
   tablaObras.addEventListener("click", (e) => {
     const i = e.target.dataset.index;
 
@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       descripcionObra.value = o.descripcion;
       imagenInput.value = o.imagen?.startsWith("data:image") ? "" : o.imagen;
 
-      // Mostrar vista previa si es Base64
+     
       if (o.imagen?.startsWith("data:image")) {
         preview.src = o.imagen;
         preview.classList.remove("d-none");
@@ -163,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // ---------- Sincronización entre pestañas ----------
+  
   window.addEventListener("storage", event => {
     if (event.key === "obras") {
       mostrarObras();

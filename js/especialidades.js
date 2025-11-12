@@ -1,9 +1,8 @@
 import { inicializarDatos } from "./app.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ especialidades.js cargado correctamente.");
+  console.log("especialidades.js cargado correctamente.");
 
-  // me aseguro de que existan las claves base
   inicializarDatos();
 
   const tabla = document.getElementById("tablaEspecialidades");
@@ -14,11 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const nombreEspecialidad = document.getElementById("nombreEspecialidad");
 
   let especialidades = JSON.parse(localStorage.getItem("especialidades")) || [];
-  console.log("📦 Especialidades cargadas desde localStorage:", especialidades);
+  console.log("Especialidades cargadas desde localStorage:", especialidades);
 
-  // ---------- render ----------
+  // Aparición de Elementos
   const mostrarEspecialidades = () => {
-    console.log("🔄 Renderizando tabla de especialidades...");
+    console.log("Renderizando tabla de especialidades...");
     tabla.innerHTML = "";
 
     especialidades.forEach((esp, index) => {
@@ -34,20 +33,20 @@ document.addEventListener("DOMContentLoaded", () => {
       tabla.appendChild(fila);
     });
 
-    console.log("✅ Tabla de especialidades actualizada.");
+    console.log("Tabla de especialidades actualizada.");
   };
 
   mostrarEspecialidades();
 
-  // ---------- nueva ----------
+  // Nueva
   btnNueva.addEventListener("click", () => {
-    console.log("🆕 Creando nueva especialidad...");
+    console.log("Creando nueva especialidad...");
     form.reset();
     idEspecialidad.value = "";
     modal.show();
   });
 
-  // ---------- guardar (alta o edición) ----------
+  // Guardar (alta o edición)
   form.addEventListener("submit", (e) => {
     e.preventDefault();
 
@@ -66,15 +65,13 @@ document.addEventListener("DOMContentLoaded", () => {
         (e) => e.id === parseInt(idEspecialidad.value)
       );
 
-      // nombre anterior para poder buscarlo en los médicos
       const nombreAnterior = especialidades[index].nombre;
 
-      // actualizo la especialidad
+      // actualización
       especialidades[index] = nueva;
       localStorage.setItem("especialidades", JSON.stringify(especialidades));
-      console.log(`✏️ Especialidad actualizada: ${nombreAnterior} ➜ ${nueva.nombre}`);
+      console.log(`Especialidad actualizada: ${nombreAnterior} ➜ ${nueva.nombre}`);
 
-      // 🔁 ACTUALIZAR MÉDICOS QUE TENÍAN ESA ESPECIALIDAD
       let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
       let cambios = 0;
 
@@ -88,42 +85,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (cambios > 0) {
         localStorage.setItem("medicos", JSON.stringify(medicos));
-        console.log(`🩺 Se actualizaron ${cambios} médico(s) que tenían "${nombreAnterior}".`);
+        console.log(`Se actualizaron ${cambios} médico(s) que tenían "${nombreAnterior}".`);
       }
     } else {
-      // si es alta
+
       especialidades.push(nueva);
       localStorage.setItem("especialidades", JSON.stringify(especialidades));
-      console.log(`🆕 Especialidad agregada: ${nueva.nombre}`);
+      console.log(`Especialidad agregada: ${nueva.nombre}`);
     }
 
     mostrarEspecialidades();
     modal.hide();
   });
 
-  // ---------- editar / eliminar ----------
+  // Editar / Eliminar 
   tabla.addEventListener("click", (e) => {
-    // editar
+    // Editar
     if (e.target.classList.contains("btnEditar")) {
       const index = e.target.dataset.index;
       const esp = especialidades[index];
-      console.log(`✏️ Editando especialidad con ID ${esp.id}`);
+      console.log(`Editando especialidad con ID ${esp.id}`);
       idEspecialidad.value = esp.id;
       nombreEspecialidad.value = esp.nombre;
       modal.show();
     }
 
-    // eliminar
+    // Eliminar
     if (e.target.classList.contains("btnEliminar")) {
       const index = e.target.dataset.index;
       const esp = especialidades[index];
 
-      if (confirm(`⚠️ ¿Seguro que querés eliminar la especialidad "${esp.nombre}"?`)) {
+      if (confirm(`¿Seguro que querés eliminar la especialidad "${esp.nombre}"?`)) {
         especialidades.splice(index, 1);
         localStorage.setItem("especialidades", JSON.stringify(especialidades));
         mostrarEspecialidades();
 
-        // al eliminar la especialidad, quitamos esa especialidad de los médicos
+
         let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
         let cambios = 0;
 
@@ -138,7 +135,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (cambios > 0) {
           localStorage.setItem("medicos", JSON.stringify(medicos));
           console.log(
-            `🗑️ Especialidad "${esp.nombre}" eliminada. Se actualizaron ${cambios} médico(s).`
+            `Especialidad "${esp.nombre}" eliminada. Se actualizaron ${cambios} médico(s).`
           );
         }
       }
