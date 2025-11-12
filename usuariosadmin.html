@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Panel de Administración - Usuarios | Clínica Médica Marca Acme S.R.L.</title>
+  <title>Administración de Usuarios | Clínica Médica Marca Acme S.R.L.</title>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
@@ -21,13 +21,26 @@
 
   <!-- NAVBAR -->
   <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
-    <div class="container d-flex justify-content-between align-items-center">
+    <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
       </a>
-      <h4 class="text-center fw-bold mb-0 flex-grow-1">Panel de Administración - Usuarios</h4>
-        <button onclick="logout()" class="btn btn-outline-danger ms-3">Cerrar sesión</button>
-        <a href="paneladmin.html" class="btn btn-outline-primary ms-3">Volver al Panel</a>
+
+      <!-- Botón hamburguesa -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Contenido colapsable -->
+      <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarResponsive">
+        <h4 class="fw-bold mb-0 text-center flex-grow-1 d-none d-lg-block">
+          Panel de Administración - Usuarios
+        </h4>
+        <div class="d-flex flex-column flex-lg-row align-items-center gap-2 mt-3 mt-lg-0">
+          <button onclick="logout()" class="btn btn-outline-danger">Cerrar sesión</button>
+          <a href="paneladmin.html" class="btn btn-outline-primary">Volver al Panel</a>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -55,7 +68,6 @@
         </tbody>
       </table>
     </div>
-
   </main>
 
   <!-- FOOTER -->
@@ -76,6 +88,5 @@
       window.location.href = "iniciosesion.html";
     }
   </script>
-
 </body>
 </html>
