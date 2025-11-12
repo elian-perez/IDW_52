@@ -12,30 +12,33 @@ document.addEventListener("DOMContentLoaded", () => {
       const response = await fetch("https://dummyjson.com/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username, 
-          password, 
-        }),
+        body: JSON.stringify({ username, password }),
       });
 
-      if (!response.ok) {
-        throw new Error("Error en las credenciales");
-      }
+      if (!response.ok) throw new Error("Error en las credenciales");
 
       const data = await response.json();
+      const userResponse = await fetch(`https://dummyjson.com/users/${data.id}`);
+      const userData = await userResponse.json();
 
-      // ✅ Guardar token y datos de usuario
-      sessionStorage.setItem("accessToken", data.token);
-      sessionStorage.setItem("user", JSON.stringify(data));
+      if (userData.role !== "admin") {
+        alerta.textContent = "⚠️ Acceso restringido: solo administradores pueden ingresar.";
+        alerta.classList.remove("d-none");
+        return;
+      }
 
-      console.log("✅ Sesión iniciada:", data);
+      sessionStorage.setItem("accessToken", data.accessToken || data.token);
+      sessionStorage.setItem("user", JSON.stringify(userData));
 
-      // Redirigir al panel de administración
       window.location.href = "paneladmin.html";
+
     } catch (error) {
-      console.error("❌ Error de login:", error);
       alerta.classList.remove("d-none");
+      alerta.textContent = "❌ Usuario o contraseña incorrectos.";
     }
   });
 });
+
+
+
 
