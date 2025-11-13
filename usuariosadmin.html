@@ -5,33 +5,30 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administración de Usuarios | Clínica Médica Marca Acme S.R.L.</title>
-
-  <!-- Bootstrap -->
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
-  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <!-- Favicon -->
-  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+  <link rel="shortcut icon" href="#" />
+  <link rel="icon" data-src="img/icono-nav.png" type="image/x-icon">
 </head>
 
 <body class="bg-body-tertiary">
 
-  <!-- Verificación de sesión -->
+  <!-- STOP de Sesión -->
   <script src="js/verificarSesion.js"></script>
 
-  <!-- NAVBAR -->
+
   <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img data-src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
       </a>
 
-      <!-- Botón hamburguesa -->
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Contenido colapsable -->
+
       <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarResponsive">
         <h4 class="fw-bold mb-0 text-center flex-grow-1 d-none d-lg-block">
           Panel de Administración - Usuarios
@@ -44,14 +41,14 @@
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
+
   <main class="container my-5">
     <div class="text-center mb-4">
       <h2 class="fw-bold">Usuarios Registrados</h2>
       <p class="text-muted">Visualización de todos los usuarios del sistema.</p>
     </div>
 
-    <!-- TABLA DE USUARIOS -->
+
     <div class="table-responsive shadow-sm">
       <table class="table table-striped table-bordered align-middle text-center">
         <thead class="table-dark">
@@ -70,14 +67,14 @@
     </div>
   </main>
 
-  <!-- FOOTER -->
+
   <footer class="bg-body text-body text-center py-3 border-top mt-5">
     <div class="container small">
       &copy; 2025 Clínica Médica Marca Acme S.R.L. - Grupo 52
     </div>
   </footer>
 
-  <!-- JS -->
+
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
   <script src="js/usuariosadmin.js"></script>
 

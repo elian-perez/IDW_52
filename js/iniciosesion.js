@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const userData = await userResponse.json();
 
       if (userData.role !== "admin") {
-        alerta.textContent = "⚠️ Acceso restringido: solo administradores pueden ingresar.";
+        alerta.textContent = "Acceso restringido: solo administradores pueden ingresar.";
         alerta.classList.remove("d-none");
         return;
       }
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     } catch (error) {
       alerta.classList.remove("d-none");
-      alerta.textContent = "❌ Usuario o contraseña incorrectos.";
+      alerta.textContent = "Usuario o contraseña incorrectos.";
     }
   });
 });

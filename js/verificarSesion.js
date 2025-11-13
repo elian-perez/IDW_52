@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const userData = sessionStorage.getItem("user");
   const user = userData ? JSON.parse(userData) : null;
 
-  // 🔒 Verificación de sesión
+  // STOP de Sesión
   if (!token || !user || user.role !== "admin") {
     window.location.href = "iniciosesion.html";
     return;
@@ -17,6 +17,6 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   if (saludoUsuario) {
-    saludoUsuario.textContent = `👋 Bienvenido, ${user.firstName} ${user.lastName}`;
+    saludoUsuario.textContent = `Bienvenido, ${user.firstName} ${user.lastName}`;
   }
 });

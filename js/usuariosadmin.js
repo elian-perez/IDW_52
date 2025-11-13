@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", async () => {
     const data = await response.json();
     let usuarios = data.users;
 
-    // 🔹 1. Filtrar solo los usuarios cuyo rol sea "user"
+    // Solo usuarios: user
     usuarios = usuarios.filter(user => user.role === "user");
 
-    tbody.innerHTML = ""; // Limpia el mensaje "Cargando usuarios..."
+    tbody.innerHTML = ""; 
 
-    // 🔹 2. Mostrar IDs personalizados empezando desde 1
+    // Id empezando de 1
     usuarios.forEach((user, index) => {
       const fila = document.createElement("tr");
       fila.innerHTML = `
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     });
 
   } catch (error) {
-    console.error("❌ Error al cargar usuarios:", error);
+    console.error("Error al cargar usuarios:", error);
     tbody.innerHTML = `<tr><td colspan="5" class="text-danger text-center">Error al cargar usuarios.</td></tr>`;
   }
 });

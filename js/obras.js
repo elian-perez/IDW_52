@@ -1,167 +1,178 @@
 import { inicializarDatos } from "./app.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ obras.js (versión con descripción) cargado correctamente.");
-
+  console.log("obras.js (Base64 compatible) cargado correctamente");
   inicializarDatos();
 
-  const tabla = document.getElementById("tablaObras");
-  const form = document.getElementById("formObra");
+  const tablaObras = document.getElementById("tablaObras");
+  const formObra = document.getElementById("formObra");
   const btnNueva = document.getElementById("btnNueva");
   const modal = new bootstrap.Modal(document.getElementById("modalObra"));
   const idObra = document.getElementById("idObra");
   const nombreObra = document.getElementById("nombreObra");
   const descripcionObra = document.getElementById("descripcionObra");
-  const imagenObra = document.getElementById("imagenObra");
+  const imagenInput = document.getElementById("imagenObra");
+  const imagenFile = document.getElementById("imagenFile");
+  const preview = document.getElementById("previewImagen");
 
   let obras = JSON.parse(localStorage.getItem("obras")) || [];
 
-  // ---------- Render ----------
+  // Función para convierte archivo a Base64
+  function fileToBase64(inputFile) {
+    return new Promise((resolve) => {
+      const file = inputFile.files[0];
+      if (!file) return resolve(null);
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  // Muestra obras sociales
   const mostrarObras = () => {
-    tabla.innerHTML = "";
-    obras.forEach((obra, index) => {
+    obras = JSON.parse(localStorage.getItem("obras")) || [];
+    tablaObras.innerHTML = "";
+
+    obras.forEach((o, i) => {
       const fila = document.createElement("tr");
       fila.innerHTML = `
-        <td>${obra.id}</td>
-        <td>${obra.nombre}</td>
-        <td>${obra.descripcion || "-"}</td>
+        <td>${o.id}</td>
+        <td>${o.nombre}</td>
+        <td>${o.descripcion}</td>
         <td>
-          <img data-src="img/${obra.imagen || "default.jpg"}" width="80" class="rounded mb-1">
-          <div class="small text-muted">${obra.imagen || ""}</div>
+          <img data-src="${o.imagen?.startsWith('data:image') ? '' : 'img/'}${o.imagen}" 
+               src="${o.imagen?.startsWith('data:image') ? o.imagen : ''}" 
+               width="80" class="rounded mb-1">
         </td>
         <td>
-          <button class="btn btn-warning btn-sm btnEditar" data-index="${index}">Editar</button>
-          <button class="btn btn-danger btn-sm btnEliminar" data-index="${index}">Eliminar</button>
+          <button class="btn btn-warning btn-sm btnEditar" data-index="${i}">Editar</button>
+          <button class="btn btn-danger btn-sm btnEliminar" data-index="${i}">Eliminar</button>
         </td>
       `;
-      tabla.appendChild(fila);
+      tablaObras.appendChild(fila);
     });
+
+    
+    if (window.reemplazarImagenes) window.reemplazarImagenes();
+  
+    if (!sessionStorage.getItem("obrasSync")) {
+      sessionStorage.setItem("obrasSync", "1");
+      window.dispatchEvent(new StorageEvent("storage", { key: "obras" }));
+      setTimeout(() => sessionStorage.removeItem("obrasSync"), 100);
+    }
   };
 
   mostrarObras();
 
-  // ---------- Nueva ----------
+  // Nueva obra 
   btnNueva.addEventListener("click", () => {
-    form.reset();
+    formObra.reset();
+    preview.src = "";
+    preview.classList.add("d-none");
     idObra.value = "";
     modal.show();
   });
 
-  // ---------- Guardar ----------
-  form.addEventListener("submit", (e) => {
+ 
+  imagenFile.addEventListener("change", async () => {
+    const base64 = await fileToBase64(imagenFile);
+    if (base64) {
+      preview.src = base64;
+      preview.classList.remove("d-none");
+    }
+  });
+
+  // ALTA obra social
+  formObra.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const nueva = {
+    let imagenFinal = imagenInput.value.trim() || "default.jpg";
+    const nuevaBase64 = await fileToBase64(imagenFile);
+
+    if (nuevaBase64) imagenFinal = nuevaBase64;
+
+    const nuevaObra = {
       id: idObra.value
         ? parseInt(idObra.value)
-        : obras.length > 0
+        : obras.length
         ? obras[obras.length - 1].id + 1
         : 1,
       nombre: nombreObra.value.trim(),
       descripcion: descripcionObra.value.trim(),
-      imagen: imagenObra.value.trim() || "default.jpg",
+      imagen: imagenFinal
     };
 
-    // 🔹 Si es edición
     if (idObra.value) {
-      const index = obras.findIndex((o) => o.id === parseInt(idObra.value));
-      const nombreAnterior = obras[index].nombre;
+    const i = obras.findIndex(o => o.id === parseInt(idObra.value));
+    const nombreAnterior = obras[i].nombre;
+    obras[i] = nuevaObra;
+    console.log(`Obra actualizada: ${nuevaObra.nombre}`);
 
-      obras[index] = nueva;
-      localStorage.setItem("obras", JSON.stringify(obras));
-      console.log(`✏️ Obra actualizada: ${nombreAnterior} ➜ ${nueva.nombre}`);
-
-      // 🔁 ACTUALIZAR OBRAS SOCIALES EN LOS MÉDICOS
-      let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
-      let cambios = 0;
-
-      medicos = medicos.map((m) => {
-        if (Array.isArray(m.obrasSociales)) {
-          const actualizadas = m.obrasSociales.map((os) =>
-            os === nombreAnterior ? nueva.nombre : os
-          );
-          if (JSON.stringify(actualizadas) !== JSON.stringify(m.obrasSociales)) {
-            cambios++;
-            return { ...m, obrasSociales: actualizadas };
-          }
-        }
-        return m;
-      });
-
-      if (cambios > 0) {
-        localStorage.setItem("medicos", JSON.stringify(medicos));
-        console.log(`🩺 Se actualizaron ${cambios} médico(s) con la nueva obra social.`);
+    
+    let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
+    medicos = medicos.map(m => {
+      if (m.obrasSociales?.includes(nombreAnterior)) {
+        m.obrasSociales = m.obrasSociales.map(os =>
+          os === nombreAnterior ? nuevaObra.nombre : os
+        );
       }
-    } else {
-      // 🔹 Si es alta
-      obras.push(nueva);
-      localStorage.setItem("obras", JSON.stringify(obras));
-      console.log(`🆕 Obra agregada: ${nueva.nombre}`);
-    }
+      return m;
+    });
+    localStorage.setItem("medicos", JSON.stringify(medicos));
+    console.log(`Médicos actualizados con el nuevo nombre de obra social`);
+  } else {
+    obras.push(nuevaObra);
+    console.log(`Obra agregada: ${nuevaObra.nombre}`);
+  }
 
+    localStorage.setItem("obras", JSON.stringify(obras));
     mostrarObras();
+    window.reemplazarImagenes(); 
     modal.hide();
   });
 
-  // ---------- Editar / Eliminar ----------
-  tabla.addEventListener("click", (e) => {
+  // Editar & Eliminar 
+  tablaObras.addEventListener("click", (e) => {
+    const i = e.target.dataset.index;
+
     if (e.target.classList.contains("btnEditar")) {
-      const index = e.target.dataset.index;
-      const obra = obras[index];
-      idObra.value = obra.id;
-      nombreObra.value = obra.nombre;
-      descripcionObra.value = obra.descripcion || "";
-      imagenObra.value = obra.imagen;
+      const o = obras[i];
+      idObra.value = o.id;
+      nombreObra.value = o.nombre;
+      descripcionObra.value = o.descripcion;
+      imagenInput.value = o.imagen?.startsWith("data:image") ? "" : o.imagen;
+
+     
+      if (o.imagen?.startsWith("data:image")) {
+        preview.src = o.imagen;
+        preview.classList.remove("d-none");
+      } else {
+        preview.classList.add("d-none");
+      }
+
       modal.show();
     }
 
     if (e.target.classList.contains("btnEliminar")) {
-      const index = e.target.dataset.index;
-      const obra = obras[index];
-
-      if (confirm(`⚠️ ¿Seguro que querés eliminar "${obra.nombre}"?`)) {
-        // 1️⃣ Eliminar la obra social del listado principal
-        obras.splice(index, 1);
+      if (confirm(`¿Eliminar la obra social "${obras[i].nombre}"?`)) {
+        obras.splice(i, 1);
         localStorage.setItem("obras", JSON.stringify(obras));
-
-        // 2️⃣ Actualizar las obras sociales de los médicos
-        let medicos = JSON.parse(localStorage.getItem("medicos")) || [];
-        let cambios = 0;
-
-        medicos = medicos.map((m) => {
-          if (Array.isArray(m.obrasSociales)) {
-            const actualizadas = m.obrasSociales.filter(
-              (os) => os.toLowerCase() !== obra.nombre.toLowerCase()
-            );
-
-            if (JSON.stringify(actualizadas) !== JSON.stringify(m.obrasSociales)) {
-              cambios++;
-              return {
-                ...m,
-                obrasSociales:
-                  actualizadas.length > 0 ? actualizadas : ["Sin obra social"],
-              };
-            }
-          }
-          return m;
-        });
-
-        if (cambios > 0) {
-          localStorage.setItem("medicos", JSON.stringify(medicos));
-          console.log(
-            `🩺 Se actualizaron ${cambios} médico(s) tras eliminar la obra social "${obra.nombre}".`
-          );
-        }
-
-        // 3️⃣ Volver a renderizar la tabla
         mostrarObras();
-
-        // 4️⃣ Notificar a otras pestañas
-        window.dispatchEvent(new StorageEvent("storage", { key: "obras" }));
       }
     }
   });
+
+  
+  window.addEventListener("storage", event => {
+    if (event.key === "obras") {
+      mostrarObras();
+    }
+  });
 });
+
+
+
 
 
 

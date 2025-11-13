@@ -1,7 +1,7 @@
-console.log("✅ app.js cargado correctamente");
+console.log("app.js cargado correctamente");
 
 export const inicializarDatos = () => {
-  // ---------- MÉDICOS ----------
+  //  MÉDICOS
   if (!localStorage.getItem("medicos")) {
     const medicosIniciales = [
       {
@@ -66,10 +66,10 @@ export const inicializarDatos = () => {
       },
     ];
     localStorage.setItem("medicos", JSON.stringify(medicosIniciales));
-    console.log("✅ Médicos iniciales cargados.");
+    console.log("Médicos iniciales cargados.");
   }
 
-  // ---------- ESPECIALIDADES ----------
+  // ESPECIALIDADES
   if (!localStorage.getItem("especialidades")) {
     const especialidadesIniciales = [
       { id: 1, nombre: "Cardiología" },
@@ -87,10 +87,10 @@ export const inicializarDatos = () => {
       "especialidades",
       JSON.stringify(especialidadesIniciales)
     );
-    console.log("✅ Especialidades iniciales cargadas.");
+    console.log("Especialidades iniciales cargadas.");
   }
 
-  // ---------- OBRAS SOCIALES ----------
+  // OBRAS SOCIALES
   if (!localStorage.getItem("obras")) {
     const obrasIniciales = [
       {
@@ -125,29 +125,29 @@ export const inicializarDatos = () => {
       },
     ];
     localStorage.setItem("obras", JSON.stringify(obrasIniciales));
-    console.log("✅ Obras sociales iniciales cargadas (con descripción).");
+    console.log("Obras sociales iniciales cargadas (con descripción).");
   }
 
-  // ---------- TURNOS POR DEFECTO ----------
+  // TURNOS
   if (!localStorage.getItem("turnos")) {
     const turnosIniciales = [
-    // --- Dr. Jesús María Amor ---
+    // Dr. Jesús María Amor
     { id: 1, medicoId: 1, dia: "2025-11-11", hora: "09:00", disponible: true },
     { id: 2, medicoId: 1, dia: "2025-11-11", hora: "10:00", disponible: true },
     { id: 3, medicoId: 1, dia: "2025-11-12", hora: "09:00", disponible: true },
     { id: 4, medicoId: 1, dia: "2025-11-12", hora: "11:00", disponible: true },
 
-    // --- Dr. Mario Miguel Trozado ---
+    // Dr. Mario Miguel Trozado
     { id: 5, medicoId: 2, dia: "2025-11-11", hora: "08:30", disponible: true },
     { id: 6, medicoId: 2, dia: "2025-11-13", hora: "09:00", disponible: true },
     { id: 7, medicoId: 2, dia: "2025-11-13", hora: "10:30", disponible: true },
 
-    // --- Dr. Atilio Simón Garabato ---
+    // Dr. Atilio Simón Garabato
     { id: 8, medicoId: 3, dia: "2025-11-14", hora: "14:00", disponible: true },
     { id: 9, medicoId: 3, dia: "2025-11-14", hora: "15:00", disponible: true },
     { id: 10, medicoId: 3, dia: "2025-11-14", hora: "15:30", disponible: true },
     ];
     localStorage.setItem("turnos", JSON.stringify(turnosIniciales));
-    console.log("✅ Turnos iniciales cargados.");
+    console.log("Turnos iniciales cargados.");
   }
 };

@@ -7,27 +7,29 @@
   <link rel="stylesheet" href="bootstrap-5.3.8-dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="CSS/reservas.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="icon" href="img/icono-nav.png" type="image/x-icon">
+  <link rel="shortcut icon" href="#" />
+  <link rel="icon" data-src="img/icono-nav.png" type="image/x-icon">
+
 </head>
 
 <body class="bg-body-tertiary">
 
-  <!-- Verificación de sesión -->
+  <!-- STOP de sesión -->
   <script src="js/verificarSesion.js"></script>
 
-  <!-- NAVBAR -->
+
   <header class="navbar navbar-expand-lg bg-body text-body shadow-sm sticky-top">
     <div class="container">
       <a class="navbar-brand d-flex align-items-center" href="index.html">
         <img data-src="img/logo2.png" alt="Logo Clínica" style="max-height: 70px; width: auto;">
       </a>
 
-      <!-- Botón para menú colapsable -->
+
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <!-- Contenido colapsable -->
+
       <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarResponsive">
         <h4 class="fw-bold mb-0 text-center flex-grow-1 d-none d-lg-block">
           Panel de Administración de Reservas
@@ -40,7 +42,7 @@
     </div>
   </header>
 
-  <!-- CONTENIDO PRINCIPAL -->
+
   <main class="container my-5">
     <h2 class="text-center my-4 fw-bold">Reservas registradas</h2>
 
@@ -60,7 +62,7 @@
           </tr>
         </thead>
         <tbody>
-          <!-- Las reservas se cargarán aquí dinámicamente -->
+          <!-- Lista de Reservas Aquí -->
         </tbody>
       </table>
     </div>
@@ -72,14 +74,17 @@
     </footer>
   </main>
 
+
   <script src="bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js"></script>
   <script type="module" src="js/reservasadmin.js"></script>
+  <script src="js/base64-loader.js"></script>
+
+  <script>
+    function logout() {
+      sessionStorage.removeItem("accessToken");
+      sessionStorage.removeItem("user");
+      window.location.href = "iniciosesion.html";
+    }
+  </script>
 </body>
-</html>
-
-        </main>
-        <script type="module" src="js/reservasadmin.js"></script>
-        <script src="js/base64-loader.js"></script>
-    </body>
-
 </html>
