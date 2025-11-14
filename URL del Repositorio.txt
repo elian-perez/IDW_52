@@ -1,16 +1,22 @@
 Hola profes!! ¿Cómo estan? 
 Compartimos el link del repositorio para su acceso!
+
+Cumplimos con la cuarta entrega dejando la siguiente info: 
+- Link del video (explicativo) en YouTube: https://www.youtube.com/watch?v=mwlp_Uqd3SI
+
+A continuación información necesaria para poder LOGEARSE en el ADMIN:
 Información para logear (administración)
-Usuario: acme
-Contraseña: saraza
+La autenticación ahora utiliza la API de https://dummyjson.com/auth/login.
+Luego del login se obtiene el usuario de https://dummyjson.com/users/{id}.
+Solo los usuarios cuyo rol sea admin pueden ingresar al panel de administración. Si el rol no es admin, el acceso es bloqueado. Usuarios autorizados:
+Usuarios: emilys - michaelw - sophiab - jamesd - emmaj 
+Contraseñas: emilyspass - michaelwpass - sophiabpass - jamesdpass - emmajpass
 
 Para más info consultar el README.md 
 ------------------------------------------------
 - Link (para clonar): https://github.com/elian-perez/IDW_52.git
 - Link (como aparece en el sitio de github navegador URL): 
 https://github.com/elian-perez/IDW_52
-
-No sabía cual de los dos dejar, pero por las dudas les dejo ambos. Esta en público así que no deberian tener problema para ingresar. 
 
 Gracias! Un abrazo! 
 Atte. Equipo de Trabajo - Grupo 52!
